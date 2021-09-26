@@ -1,6 +1,8 @@
 import styles from './app.module.scss';
+
 import { ReactComponent as Logo } from './logo.svg';
 import star from './star.svg';
+
 import { Route, Link } from 'react-router-dom';
 
 export function App() {
@@ -8,7 +10,7 @@ export function App() {
     <div className={styles.app}>
       <header className="flex">
         <Logo width="75" height="75" />
-        <h1>Welcome to inventory-shell!</h1>
+        <h1>Welcome to inventory-admin!</h1>
       </header>
       <main>
         <h2>Resources &amp; Tools</h2>

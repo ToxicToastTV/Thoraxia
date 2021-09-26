@@ -1,6 +1,133 @@
 {
   "version": 2,
   "projects": {
+    "data-access-inventory": {
+      "root": "libs/data-access-inventory",
+      "sourceRoot": "libs/data-access-inventory/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "libs/data-access-inventory/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/data-access-inventory"],
+          "options": {
+            "jestConfig": "libs/data-access-inventory/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "inventory-admin": {
+      "root": "apps/inventory-admin",
+      "sourceRoot": "apps/inventory-admin/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/inventory-admin",
+            "index": "apps/inventory-admin/src/index.html",
+            "main": "apps/inventory-admin/src/main.tsx",
+            "polyfills": "apps/inventory-admin/src/polyfills.ts",
+            "tsConfig": "apps/inventory-admin/tsconfig.app.json",
+            "assets": [
+              "apps/inventory-admin/src/favicon.ico",
+              "apps/inventory-admin/src/assets"
+            ],
+            "styles": ["apps/inventory-admin/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/inventory-admin/src/environments/environment.ts",
+                  "with": "apps/inventory-admin/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "inventory-admin:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "inventory-admin:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/inventory-admin/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/inventory-admin"],
+          "options": {
+            "jestConfig": "apps/inventory-admin/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "inventory-admin-e2e": {
+      "root": "apps/inventory-admin-e2e",
+      "sourceRoot": "apps/inventory-admin-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/inventory-admin-e2e/cypress.json",
+            "devServerTarget": "inventory-admin:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "inventory-admin:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/inventory-admin-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "inventory-shell": {
       "root": "apps/inventory-shell",
       "sourceRoot": "apps/inventory-shell/src",
@@ -122,6 +249,28 @@
           "outputs": ["coverage/libs/shared"],
           "options": {
             "jestConfig": "libs/shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-components": {
+      "root": "libs/ui-components",
+      "sourceRoot": "libs/ui-components/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/ui-components/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui-components"],
+          "options": {
+            "jestConfig": "libs/ui-components/jest.config.js",
             "passWithNoTests": true
           }
         }

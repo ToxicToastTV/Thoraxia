@@ -28,10 +28,15 @@
     ]
   },
   "projects": {
-    "shared": {
-      "tags": [
-        "shared"
-      ]
+    "data-access-inventory": {
+      "tags": []
+    },
+    "inventory-admin": {
+      "tags": ["ui", "inventory", "administration"]
+    },
+    "inventory-admin-e2e": {
+      "tags": ["inventory", "testing"],
+      "implicitDependencies": ["inventory-admin"]
     },
     "inventory-shell": {
       "tags": ["ui", "inventory"]
@@ -39,6 +44,12 @@
     "inventory-shell-e2e": {
       "tags": ["inventory", "testing"],
       "implicitDependencies": ["inventory-shell"]
+    },
+    "shared": {
+      "tags": ["shared"]
+    },
+    "ui-components": {
+      "tags": []
     }
   }
 }
