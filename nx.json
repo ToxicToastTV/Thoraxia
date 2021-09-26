@@ -28,11 +28,16 @@
     ]
   },
   "projects": {
+    "shared": {
+      "tags": [
+        "shared"
+      ]
+    },
     "inventory-shell": {
-      "tags": []
+      "tags": ["ui", "inventory"]
     },
     "inventory-shell-e2e": {
-      "tags": [],
+      "tags": ["inventory", "testing"],
       "implicitDependencies": ["inventory-shell"]
     }
   }
