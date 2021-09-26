@@ -1,13 +1,16 @@
 import './data-access-inventory.module.scss';
+import React from 'react';
+import { AppProvider } from './providers';
 
-/* eslint-disable-next-line */
-export interface DataAccessInventoryProps {}
+export interface Props {
+  children: React.ReactNode;
+}
 
-export function DataAccessInventory(props: DataAccessInventoryProps) {
+export function DataAccessInventory(props: Props) {
   return (
-    <div>
-      <h1>Welcome to DataAccessInventory!</h1>
-    </div>
+    <AppProvider>
+      {props.children}
+    </AppProvider>
   );
 }
 

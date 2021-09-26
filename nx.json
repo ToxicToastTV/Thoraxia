@@ -29,7 +29,7 @@
   },
   "projects": {
     "data-access-inventory": {
-      "tags": []
+      "tags": ["inventory", "state"]
     },
     "inventory-admin": {
       "tags": ["ui", "inventory", "administration"]
@@ -49,7 +49,7 @@
       "tags": ["shared"]
     },
     "ui-components": {
-      "tags": []
+      "tags": ["ui"]
     }
   }
 }
