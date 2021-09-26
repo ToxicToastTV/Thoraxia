@@ -1,7 +1,7 @@
-import { Optional } from '@thoraxia/shared';
+import { Loader, Optional } from '@thoraxia/shared';
 
 export interface IUiModel {
-  status: 'loading' | 'loaded' | 'error';
+  status: Loader;
   error: Optional<string>;
 }
 
