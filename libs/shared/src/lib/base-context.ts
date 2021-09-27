@@ -1,4 +1,4 @@
-export interface InitializeContext<T,V> {
+export interface InitializeContext<T, V> {
   state: T;
   dispatch: V;
 }

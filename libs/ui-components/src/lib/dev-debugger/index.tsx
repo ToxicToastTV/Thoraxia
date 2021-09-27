@@ -5,7 +5,6 @@ interface Props {
 }
 
 function DevDebugger(props: Props) {
-
   return (
     <pre style={{ fontWeight: 400, wordWrap: 'break-word' }}>
       {JSON.stringify(props.data, null, 4)}

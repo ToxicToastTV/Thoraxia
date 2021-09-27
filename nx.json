@@ -50,6 +50,9 @@
     },
     "ui-components": {
       "tags": ["ui"]
+    },
+    "ui-hooks": {
+      "tags": []
     }
   }
 }

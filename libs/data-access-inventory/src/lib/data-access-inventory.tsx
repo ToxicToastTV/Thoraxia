@@ -7,11 +7,7 @@ export interface Props {
 }
 
 export function DataAccessInventory(props: Props) {
-  return (
-    <AppProvider>
-      {props.children}
-    </AppProvider>
-  );
+  return <AppProvider>{props.children}</AppProvider>;
 }
 
 export default DataAccessInventory;

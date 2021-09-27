@@ -9,7 +9,6 @@ interface Props {
 }
 
 export function AppProvider(props: Props) {
-
   const rootReducer = React.useMemo(() => {
     return combineReducers({
       ui: UiReducer,
