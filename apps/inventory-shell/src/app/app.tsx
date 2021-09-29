@@ -41,6 +41,10 @@ export function App() {
       route: '/categories',
     });
     navigation.push({
+      title: 'Items',
+      route: '/items',
+    });
+    navigation.push({
       title: 'Companies',
       route: '/companies',
     });
