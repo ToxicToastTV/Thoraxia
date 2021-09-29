@@ -45,6 +45,7 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
+    "@auth0/auth0-react": "^1.8.0",
     "@nrwl/cli": "12.6.5",
     "@nrwl/cypress": "12.9.0",
     "@nrwl/eslint-plugin-nx": "12.9.0",

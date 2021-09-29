@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@thoraxia/data-access-auth0": ["libs/data-access-auth0/src/index.ts"],
       "@thoraxia/data-access-inventory": [
         "libs/data-access-inventory/src/index.ts"
       ],

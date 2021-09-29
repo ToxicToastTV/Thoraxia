@@ -6,6 +6,7 @@ import { IItemModel, initItemState } from './item.model';
 import { ILocationModel, initLocationState } from './location.model';
 import { initSizeState, ISizeModel } from './size.model';
 import { initTypeState, ITypeModel } from './type.model';
+import { IAuthModel, initAuthState } from './auth.model';
 
 export interface IAppModel {
   ui: IUiModel;
@@ -15,6 +16,7 @@ export interface IAppModel {
   location: ILocationModel;
   size: ISizeModel;
   type: ITypeModel;
+  auth: IAuthModel;
 }
 
 export const initAppState = InitializeAppState<IAppModel>({
@@ -25,4 +27,5 @@ export const initAppState = InitializeAppState<IAppModel>({
   location: initLocationState,
   size: initSizeState,
   type: initTypeState,
+  auth: initAuthState,
 });

@@ -6,3 +6,4 @@ export * from './location.model';
 export * from './item.model';
 export * from './size.model';
 export * from './type.model';
+export * from './auth.model';

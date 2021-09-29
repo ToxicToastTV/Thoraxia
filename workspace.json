@@ -1,6 +1,28 @@
 {
   "version": 2,
   "projects": {
+    "data-access-auth0": {
+      "root": "libs/data-access-auth0",
+      "sourceRoot": "libs/data-access-auth0/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/data-access-auth0/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/data-access-auth0"],
+          "options": {
+            "jestConfig": "libs/data-access-auth0/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "data-access-inventory": {
       "root": "libs/data-access-inventory",
       "sourceRoot": "libs/data-access-inventory/src",

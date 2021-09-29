@@ -1,12 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Profile from './profile';
+import Show from '../show';
 
 interface Props {
   isDark: boolean;
   navigation: Array<{ title: string; route: string; }>;
   dropdown: boolean;
   avatar: string;
+  isLoggedIn: boolean;
+  loginWithRedirect: () => void;
 }
 
 function TopNavigation(props: Props) {
@@ -71,7 +74,12 @@ function TopNavigation(props: Props) {
             </button>
 
             <div className="ml-3 relative">
-              <Profile drowndown={props.dropdown} avatar={props.avatar} />
+              <Show show={props.isLoggedIn}>
+                <Profile drowndown={props.dropdown} avatar={props.avatar} />
+              </Show>
+              <Show show={!props.isLoggedIn}>
+                <button type="button" className="" onClick={props.loginWithRedirect}>Login</button>
+              </Show>
             </div>
           </div>
         </div>
