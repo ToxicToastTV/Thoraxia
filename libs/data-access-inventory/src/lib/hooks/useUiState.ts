@@ -33,11 +33,18 @@ export function useUiState() {
     }
   }
 
+  function setSocketData(socketData: any): void {
+    if (socketData !== null) {
+      dispatch({ type: UiTypes.SetSocketData, payload: socketData });
+    }
+  }
+
   return {
     setStatus,
     setError,
     setNavigation,
-    addNavigation
+    addNavigation,
+    setSocketData
   }
 
 }

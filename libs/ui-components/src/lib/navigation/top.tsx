@@ -1,15 +1,15 @@
 import React from 'react';
-import { useToggle } from '@thoraxia/ui-hooks';
-import { Show } from '@thoraxia/ui-components/*';
 import { NavLink } from 'react-router-dom';
+import Profile from './profile';
 
 interface Props {
   isDark: boolean;
   navigation: Array<{ title: string; route: string; }>;
+  dropdown: boolean;
+  avatar: string;
 }
 
 function TopNavigation(props: Props) {
-  const profileToggler = useToggle(false);
 
   return (
     <nav className={props.isDark ? 'bg-gray-800 text-white' : 'bg-white'}>
@@ -71,57 +71,7 @@ function TopNavigation(props: Props) {
             </button>
 
             <div className="ml-3 relative">
-              <div>
-                <button
-                  type="button"
-                  className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                  id="user-menu-button"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  onClick={() => profileToggler.toggle()}
-                >
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    className="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </button>
-              </div>
-
-              <Show show={profileToggler.state}>
-                <div
-                  className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="user-menu-button"
-                >
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
-                    id="user-menu-item-0"
-                  >
-                    Your Profile
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
-                    id="user-menu-item-1"
-                  >
-                    Settings
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
-                    id="user-menu-item-2"
-                  >
-                    Sign out
-                  </a>
-                </div>
-              </Show>
+              <Profile drowndown={props.dropdown} avatar={props.avatar} />
             </div>
           </div>
         </div>
