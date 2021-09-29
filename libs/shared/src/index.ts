@@ -4,3 +4,4 @@ export * from './lib/base-state';
 export * from './lib/base-types';
 //
 export * from './lib/reducer-utils';
+export * from './lib/worker-utils';
