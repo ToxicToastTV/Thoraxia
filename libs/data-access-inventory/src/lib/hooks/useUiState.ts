@@ -34,9 +34,7 @@ export function useUiState() {
   }
 
   function setSocketData(socketData: any): void {
-    if (socketData !== null) {
-      dispatch({ type: UiTypes.SetSocketData, payload: socketData });
-    }
+    dispatch({ type: UiTypes.SetSocketData, payload: socketData });
   }
 
   return {

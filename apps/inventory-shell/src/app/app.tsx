@@ -26,8 +26,10 @@ export function App() {
       '/assets/workers/websocket-worker.js',
       'wss://websocket.icos-dev.dpp.porsche.com/icos?token=eyJraWQiOiJpZmJSWm5WSW1lZWZcL2lEVGl4Z3QwbHpEck5Vb1NBUEZpbXlXdE9tRkRwND0iLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoiX095b3NnaDJTdDljMURtMlVfUDFpZyIsInN1YiI6ImE4NGViMjU5LWQ3ODctNDcyNy1hZmI4LTllYmRiNTIxNTZhMCIsImNvZ25pdG86Z3JvdXBzIjpbImV1LXdlc3QtMV9Jd01hQk1FUlpfY2VudHJhbERQUEF1dGgiXSwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuZXUtd2VzdC0xLmFtYXpvbmF3cy5jb21cL2V1LXdlc3QtMV9Jd01hQk1FUloiLCJjb2duaXRvOnVzZXJuYW1lIjoiY2VudHJhbGRwcGF1dGhfMTlhNDhjY2EtMzg2Ny00NmVjLTkwNzItZjQ4YWE5MThjODE4IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZXdpZzNsYSIsImdpdmVuX25hbWUiOiJUaG9tYXMiLCJhdWQiOiI3dTlwMDZsdXJodG5sMzZobTFpMDh0cG10YiIsImlkZW50aXRpZXMiOlt7InVzZXJJZCI6IjE5YTQ4Y2NhLTM4NjctNDZlYy05MDcyLWY0OGFhOTE4YzgxOCIsInByb3ZpZGVyTmFtZSI6ImNlbnRyYWxEUFBBdXRoIiwicHJvdmlkZXJUeXBlIjoiT0lEQyIsImlzc3VlciI6bnVsbCwicHJpbWFyeSI6InRydWUiLCJkYXRlQ3JlYXRlZCI6IjE2MjU4MzYwMDQwNjEifV0sInRva2VuX3VzZSI6ImlkIiwic2NvcGUiOiJQMSBQMiBQMyBQNCBQNSBQNiBQMTAgUDEyIFAxMSBQMTQgUDEzIFAxNiBQMTUgUDE4IFAxNyIsImF1dGhfdGltZSI6MTYzMjk0Mzg3NywiZXhwIjoxNjMyOTQ3NDc3LCJpYXQiOjE2MzI5NDM4NzcsImZhbWlseV9uYW1lIjoiS29ydHlrYSIsImVtYWlsIjoidGhvbWFzLmtvcnR5a2FAY2dpLmNvbSJ9.lF_s8Z_bniy4L4JF-vUZJxgCUaPeEdSymr3T8oBVdHgSPV0Kv8uO98zW_k346AvM9jrdGamvoc34pBQ22GfodZUtT5tsDWUijZ3JQbGcMTIy-3MX6GpBhrJUlckMiRSyHJXigA_PByctDfICON6xlOtkwhua596aR4yHp6FpxDiIJlepK5AFexNWeBiEY8ZeLyhDEvYlh3crVMEprvsG7efP1D8uHHx43uDyetzX5kDHqrFzk5UUmA0vaaQgmYcV07HqO1mPtsbRJ5CUBDOZJzt1aCKvzSO2ul9JfoCGOtEymjE89QK81JtNj_-sajMbVh-CvMPvpL9TckOwrWnAXQ',
       (data => {
-        console.error('worker data', data);
-        uiState.setSocketData(data)
+        if (typeof data !== 'undefined') {
+          uiState.setSocketData(data)
+        }
+
       })
     );
   }, []);
