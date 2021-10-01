@@ -9,7 +9,9 @@ interface Props {
   dropdown: boolean;
   avatar: string;
   isLoggedIn: boolean;
+  isAdmin: boolean;
   loginWithRedirect: () => void;
+  logoutWithRedirect: () => void;
 }
 
 function TopNavigation(props: Props) {
@@ -50,6 +52,7 @@ function TopNavigation(props: Props) {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <Show show={props.isLoggedIn && props.isAdmin} key="ShowNotifications">
             <button
               type="button"
               className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -72,15 +75,37 @@ function TopNavigation(props: Props) {
                 />
               </svg>
             </button>
+            </Show>
 
             <div className="ml-3 relative">
-              <Show show={props.isLoggedIn}>
-                <Profile drowndown={props.dropdown} avatar={props.avatar} />
+              <Show show={props.isLoggedIn} key="ShowProfile">
+                <Profile
+                  key="User Profile"
+                  drowndown={props.dropdown}
+                  avatar={props.avatar}
+                  isAdmin={props.isAdmin}
+                />
               </Show>
-              <Show show={!props.isLoggedIn}>
-                <button type="button" className="" onClick={props.loginWithRedirect}>Login</button>
+              <Show show={!props.isLoggedIn} key="ShowLogin">
+                <button
+                  type="button"
+                  className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  onClick={props.loginWithRedirect}>Login</button>
               </Show>
             </div>
+            <Show show={props.isLoggedIn} key="ShowLogout">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <button
+                type="button"
+                className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                onClick={props.logoutWithRedirect}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+              </button>
+            </div>
+            </Show>
           </div>
         </div>
       </div>

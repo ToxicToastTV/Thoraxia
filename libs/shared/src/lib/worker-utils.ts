@@ -3,5 +3,5 @@ export function workerUtils<T>(workerPath: string, workerData: string, callback:
   worker.postMessage(workerData);
   worker.addEventListener('message', (event: MessageEvent<T>) => {
     callback(event.data);
-  })
+  });
 }

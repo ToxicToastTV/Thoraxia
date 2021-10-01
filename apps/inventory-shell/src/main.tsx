@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 import App from './app/app';
 import { DataAccessInventory } from '@thoraxia/data-access-inventory';
@@ -15,9 +15,9 @@ ReactDOM.render(
         clientId={environment.AUTH0_CLIENT_ID}
         redirectUri={window.location.origin}
         >
-        <HashRouter>
+        <BrowserRouter>
           <App />
-        </HashRouter>
+        </BrowserRouter>
       </DataAccessAuth0>
     </DataAccessInventory>
   </StrictMode>,

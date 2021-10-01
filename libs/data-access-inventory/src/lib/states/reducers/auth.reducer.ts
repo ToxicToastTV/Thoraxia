@@ -30,6 +30,24 @@ export function AuthReducer(state: IAuthModel, action: AuthActionTypes): IAuthMo
         ...state,
         avatar: action.payload,
       }
+
+    case AuthTypes.SetAdminStatus:
+      return {
+        ...state,
+        isAdmin: action.payload
+      }
+
+    case AuthTypes.SetToken:
+      return {
+        ...state,
+        token: action.payload
+      }
+
+    case AuthTypes.SetRoles:
+      return {
+        ...state,
+        roles: action.payload
+      }
   }
 
 }

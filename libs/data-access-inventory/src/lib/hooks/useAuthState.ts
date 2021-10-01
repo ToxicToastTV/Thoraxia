@@ -1,6 +1,6 @@
 import { useAppState } from './useAppState';
 import { AuthTypes } from '../states/actions/auth.action';
-import { Loader } from '@thoraxia/shared';
+import { Loader, Nullable } from '@thoraxia/shared';
 
 export function useAuthState() {
   const { appState, dispatch } = useAppState();
@@ -17,15 +17,33 @@ export function useAuthState() {
     }
   }
 
-  function setUserName(username: string): void {
+  function setUserName(username: Nullable<string>): void {
     if (appState.auth.username !== username) {
       dispatch({ type: AuthTypes.SetNickname, payload: username});
     }
   }
 
-  function setAvatar(avatar: string): void {
+  function setAvatar(avatar: Nullable<string>): void {
     if (appState.auth.avatar !== avatar) {
       dispatch({ type: AuthTypes.SetAvatar, payload: avatar});
+    }
+  }
+
+  function setAdminStatus(status: boolean): void {
+    if (appState.auth.isAdmin !== status) {
+      dispatch({ type: AuthTypes.SetAdminStatus, payload: status });
+    }
+  }
+
+  function setToken(token: Nullable<string>): void {
+    if (appState.auth.token !== token) {
+      dispatch({ type: AuthTypes.SetToken, payload: token });
+    }
+  }
+
+  function setRoles(roles: Array<string>): void {
+    if (appState.auth.roles !== roles) {
+      dispatch({ type: AuthTypes.SetRoles, payload: roles });
     }
   }
 
@@ -33,7 +51,10 @@ export function useAuthState() {
     setLoader,
     setStatus,
     setUserName,
-    setAvatar
+    setAvatar,
+    setAdminStatus,
+    setToken,
+    setRoles
   }
 
 }

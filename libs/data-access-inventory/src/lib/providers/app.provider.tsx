@@ -1,18 +1,19 @@
 import React from 'react';
 import { combineReducers } from '@thoraxia/shared';
 import { AppContext } from '../contexts';
-import { AuthReducer, UiReducer } from '../states/reducers';
+import { AuthReducer, CategoryReducer, UiReducer } from '../states/reducers';
 import { initAppState } from '../states/models';
 
 interface Props {
   children: React.ReactNode;
 }
 
-export function AppProvider(props: Props) {
+function AppProvider(props: Props) {
   const rootReducer = React.useMemo(() => {
     return combineReducers({
       ui: UiReducer,
       auth: AuthReducer,
+      category: CategoryReducer,
     });
   }, []);
   const [state, dispatch] = React.useReducer(rootReducer, initAppState);
@@ -23,3 +24,5 @@ export function AppProvider(props: Props) {
     </AppContext.Provider>
   );
 }
+
+export default React.memo(AppProvider);

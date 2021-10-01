@@ -34,12 +34,18 @@
     "data-access-inventory": {
       "tags": ["inventory", "state"]
     },
+    "gateway": {
+      "tags": []
+    },
     "inventory-admin": {
       "tags": ["ui", "inventory", "administration"]
     },
     "inventory-admin-e2e": {
       "tags": ["inventory", "testing"],
       "implicitDependencies": ["inventory-admin"]
+    },
+    "inventory-service": {
+      "tags": []
     },
     "inventory-shell": {
       "tags": ["ui", "inventory"]

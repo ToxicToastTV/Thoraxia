@@ -24,14 +24,5 @@ export function UiReducer(state: IUiModel, action: UIActionTypes): IUiModel {
         ...state,
         navigation: action.payload,
       }
-
-    case UiTypes.SetSocketData:
-      return {
-        ...state,
-        socket: [
-          ...state.socket,
-          action.payload,
-        ]
-      }
   }
 }

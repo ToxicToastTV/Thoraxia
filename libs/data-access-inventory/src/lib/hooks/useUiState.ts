@@ -23,26 +23,10 @@ export function useUiState() {
     }
   }
 
-  function addNavigation(navigation: { title: string; route: string; }): void {
-    if (!appState.ui.navigation.includes(navigation)) {
-      const newNavigation = [
-          ...appState.ui.navigation,
-        navigation,
-      ];
-      dispatch({ type: UiTypes.SetNavigation, payload: newNavigation });
-    }
-  }
-
-  function setSocketData(socketData: any): void {
-    dispatch({ type: UiTypes.SetSocketData, payload: socketData });
-  }
-
   return {
     setStatus,
     setError,
     setNavigation,
-    addNavigation,
-    setSocketData
   }
 
 }
