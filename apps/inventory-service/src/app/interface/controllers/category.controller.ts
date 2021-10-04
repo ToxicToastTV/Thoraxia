@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Logger } from '@nestjs/common';
 import { Ctx, KafkaContext, MessagePattern, Payload } from '@nestjs/microservices';
 import { InventoryPattern } from '@thoraxia/shared';
 import { CreateCategory, SingleCategory } from '../dtos/category.dto';
@@ -16,12 +16,22 @@ export class CategoryController {
 
   @MessagePattern(InventoryPattern.LIST)
   listCategories(@Payload('value') payload: any, @Ctx() context: KafkaContext) {
-    return this.queryBus.execute(new GetCategoriesQuery());
+    try {
+      return this.queryBus.execute(new GetCategoriesQuery()) || [];
+    } catch (e) {
+      Logger.error(e);
+      return [];
+    }
   }
 
   @MessagePattern(InventoryPattern.SINGLE)
   singleCategory(@Payload('value') payload: SingleCategory, @Ctx() context: KafkaContext) {
-    return this.queryBus.execute(new GetCategoryQuery(payload.id));
+    try {
+      return this.queryBus.execute(new GetCategoryQuery(payload.id)) || {};
+    } catch (e) {
+      Logger.error(e);
+      return {};
+    }
   }
 
   @MessagePattern(InventoryPattern.CREATE)

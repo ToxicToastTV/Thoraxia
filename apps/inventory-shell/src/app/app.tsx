@@ -118,9 +118,7 @@ export function App() {
         loginWithRedirect={() => auth0.loginWithRedirect()}
         logoutWithRedirect={() => auth0.logout()}
       />
-      <Show key="appState" show={appState.auth.loggedIn && appState.auth.roles.includes(BaseRoles.ACCESS)}>
-        <DevDebugger data={appState} />
-      </Show>
+      <DevDebugger data={appState} />
     </React.Suspense>
   );
 }
