@@ -10,10 +10,10 @@ function Workers(props: Props) {
   const uiState = useUiState();
   const categoryState = useCategoryState();
 
-  const categoryWorker = React.useCallback(() => {
+  const categoryWorker = React.useCallback((token: string) => {
     workerUtils<any>(
       '/assets/workers/api-worker.js',
-      'http://localhost:3333/api/inventory/category',
+      { url: 'http://localhost:3333/api/inventory/category', token },
       (categoryData => {
         if (categoryData) {
           const { status, result } = categoryData;
@@ -32,9 +32,12 @@ function Workers(props: Props) {
   //
   React.useEffect(() => {
     if (appState.auth.loggedIn) {
-      categoryWorker();
+      if (appState.auth.token !== null) {
+        categoryWorker(appState.auth.token);
+      }
+
     }
-  }, [appState.auth.loggedIn])
+  }, [appState.auth.loggedIn, appState.auth.token])
   //
   return null;
 }

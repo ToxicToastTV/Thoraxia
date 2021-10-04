@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { CategoryController } from './category.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { environment } from '../../environments/environment';
+import { InventoryGuard } from './inventory.guard';
 
 @Module({
   imports: [
@@ -25,6 +26,9 @@ import { environment } from '../../environments/environment';
   ],
   controllers: [
     CategoryController
+  ],
+  providers: [
+    InventoryGuard
   ],
 })
 export class InventoryModule {}
