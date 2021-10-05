@@ -1,5 +1,6 @@
 import { useAppState, useAuthState, useUiState } from '@thoraxia/data-access-inventory';
 import {
+  Alerts,
   DevDebugger,
   Loading, Show,
   TopNavigation
@@ -151,7 +152,11 @@ export function App() {
             data={appState.category.data} />
         </Route>
         <Route path="*">
-          <DevDebugger data={appState} />
+          <DevDebugger data={appState.company} />
+          <DevDebugger data={appState.item} />
+          <DevDebugger data={appState.location} />
+          <DevDebugger data={appState.size} />
+          <DevDebugger data={appState.type} />
         </Route>
       </Switch>
     </React.Suspense>

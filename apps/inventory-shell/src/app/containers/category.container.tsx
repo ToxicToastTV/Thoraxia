@@ -17,13 +17,15 @@ function CategoryContainer(props: Props) {
         <Show show={props.data.length === 0}>
           <Alerts type="danger" header="No entities found" />
         </Show>
-        <div className="min-h-screen bg-gray-100 flex flex-col justify-start">
-          <div className="relative m-3 flex flex-wrap mx-auto justify-center">
-            {props.data.map(item => (
-              <Cards hasPicture={true} header={item.title} onClick={() => push(`/categories/${item.id}`)} />
-            ))}
+        <Show show={props.data.length > 0}>
+          <div className="min-h-screen bg-gray-100 flex flex-col justify-start">
+            <div className="relative m-3 flex flex-wrap mx-auto justify-center">
+              {props.data.map(item => (
+                <Cards hasPicture={true} header={item.title} onClick={() => push(`/categories/${item.id}`)} />
+              ))}
+            </div>
           </div>
-        </div>
+        </Show>
       </Show>
       <Show show={props.isLoading}>
         <LoadingCard />
