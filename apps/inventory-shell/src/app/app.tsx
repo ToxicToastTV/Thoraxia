@@ -8,7 +8,9 @@ import React from 'react';
 import { useRouter } from '@thoraxia/ui-hooks';
 import { useAuth0 } from '@auth0/auth0-react';
 import Workers from './workers';
-import { BaseRoles } from '@thoraxia/shared';
+import Rest from './rest';
+import { Route, Switch } from 'react-router-dom';
+import CategoryContainer from './containers/category.container';
 
 export function App() {
   const { appState } = useAppState();
@@ -90,23 +92,47 @@ export function App() {
     if ('error' in router.query && 'error_description' in router.query) {
       const { error, error_description } = router.query as { error: string; error_description: string; };
     }
-  }, [router.query])
+  }, [router.query]);
 
-  /*React.useEffect(() => {
-    if (router !== null && router.query !== null) {
-      if ('error' in router?.query) {
-
-        toast(error_description, {
-          type: 'error',
-        })
-      }
+  React.useEffect(() => {
+    if (
+      appState.auth.status === 'error' ||
+      appState.category.status === 'error' ||
+      appState.item.status === 'error' ||
+      appState.type.status === 'error' ||
+      appState.company.status === 'error' ||
+      appState.location.status === 'error' ||
+      appState.size.status === 'error'
+    ) {
+      uiState.setStatus('error');
+    } else if (
+      appState.auth.status === 'loaded' &&
+      appState.category.status === 'loaded' &&
+      appState.item.status === 'loaded' &&
+      appState.type.status === 'loaded' &&
+      appState.company.status === 'loaded' &&
+      appState.location.status === 'loaded' &&
+      appState.size.status === 'loaded'
+    ) {
+      uiState.setStatus('loaded');
+    } else {
+      uiState.setStatus('loading');
     }
-
-  }, [router.query])*/
+  }, [
+    appState.auth.status,
+    appState.category.status,
+    appState.item.status,
+    appState.type.status,
+    appState.company.status,
+    appState.location.status,
+    appState.size.status
+  ])
 
   return (
     <React.Suspense fallback={<Loading color="text-green-700" />}>
-      <Workers key="WebWorkers" />
+      <Show show={appState.auth.token !== null}>
+        <Rest key="RestApi" token={appState.auth.token} />
+      </Show>
       <TopNavigation
         key="TopNavigation"
         isDark={true}
@@ -118,9 +144,18 @@ export function App() {
         loginWithRedirect={() => auth0.loginWithRedirect()}
         logoutWithRedirect={() => auth0.logout()}
       />
-      <DevDebugger data={appState} />
+      <Switch>
+        <Route path="/categories" exact>
+          <CategoryContainer
+            isLoading={appState.category.status === 'loading'}
+            data={appState.category.data} />
+        </Route>
+        <Route path="*">
+          <DevDebugger data={appState} />
+        </Route>
+      </Switch>
     </React.Suspense>
   );
 }
 
-export default App;
+export default React.memo(App);

@@ -1,5 +1,5 @@
-import { Controller, Get, Logger } from '@nestjs/common';
-import { Ctx, KafkaContext, MessagePattern, Payload } from '@nestjs/microservices';
+import { Controller, Logger } from '@nestjs/common';
+import { Ctx, KafkaContext, MessagePattern, Payload, RpcException } from '@nestjs/microservices';
 import { InventoryPattern } from '@thoraxia/shared';
 import { CreateCategory, SingleCategory } from '../dtos/category.dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
@@ -15,27 +15,46 @@ export class CategoryController {
   ) {  }
 
   @MessagePattern(InventoryPattern.LIST)
-  listCategories(@Payload('value') payload: any, @Ctx() context: KafkaContext) {
+  async listCategories(@Payload('value') payload: any, @Ctx() context: KafkaContext) {
     try {
-      return this.queryBus.execute(new GetCategoriesQuery()) || [];
+      Logger.debug(context.getTopic())
+      return await this.queryBus.execute(new GetCategoriesQuery());
     } catch (e) {
-      Logger.error(e);
-      return [];
+      /*throw new RpcException({
+        status: e.status,
+        message: e.message,
+      });*/
+      return {
+        error: {
+          status: e.status,
+          message: e.message,
+        }
+      }
     }
   }
 
   @MessagePattern(InventoryPattern.SINGLE)
-  singleCategory(@Payload('value') payload: SingleCategory, @Ctx() context: KafkaContext) {
+  async singleCategory(@Payload('value') payload: SingleCategory, @Ctx() context: KafkaContext) {
     try {
-      return this.queryBus.execute(new GetCategoryQuery(payload.id)) || {};
+      Logger.debug(context.getTopic())
+      return await this.queryBus.execute(new GetCategoryQuery(payload.id));
     } catch (e) {
-      Logger.error(e);
-      return {};
+      /*throw new RpcException({
+        status: e.status,
+        message: e.message,
+      });*/
+      return {
+        error: {
+          status: e.status,
+          message: e.message,
+        }
+      }
     }
   }
 
   @MessagePattern(InventoryPattern.CREATE)
-  createCategory(@Payload('value') payload: CreateCategory, @Ctx() context: KafkaContext) {
+  async createCategory(@Payload('value') payload: CreateCategory, @Ctx() context: KafkaContext) {
+    Logger.debug(context.getTopic())
     // return this.onCommand('', payload);
   }
 }

@@ -11,27 +11,21 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { environment } from './environments/environment';
 
 async function bootstrap() {
-  try {
-    const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-      transport: Transport.KAFKA,
-      options: {
-        client: {
-          clientId: 'inventory',
-          brokers: [
-            environment.KAFKA_URI
-          ]
-        },
-        consumer: {
-          groupId: 'inventory-consumer',
-        }
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
+    transport: Transport.KAFKA,
+    options: {
+      client: {
+        clientId: 'inventory',
+        brokers: [
+          environment.KAFKA_URI
+        ]
       },
-    });
-    await app.listen();
-  } catch (e) {
-    console.error(e);
-    throw e;
-  }
-
+      consumer: {
+        groupId: 'inventory-consumer',
+      }
+    },
+  });
+  await app.listen();
 }
 
 bootstrap();
