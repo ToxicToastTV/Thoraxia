@@ -1,9 +1,10 @@
 import { useAppState, useAuthState, useUiState } from '@thoraxia/data-access-inventory';
 import {
   Alerts,
+  Buttons,
   DevDebugger,
   Loading, Show,
-  TopNavigation
+  Navigation
 } from '@thoraxia/ui-components/index';
 import React from 'react';
 import { useRouter } from '@thoraxia/ui-hooks';
@@ -134,16 +135,13 @@ export function App() {
       <Show show={appState.auth.token !== null}>
         <Rest key="RestApi" token={appState.auth.token} />
       </Show>
-      <TopNavigation
-        key="TopNavigation"
-        isDark={true}
-        navigation={appState.ui.navigation}
+      <Navigation
+        key="Navigation"
         avatar={appState.auth.avatar || ''}
-        dropdown={false}
         isLoggedIn={appState.auth.loggedIn}
-        isAdmin={appState.auth.isAdmin}
         loginWithRedirect={() => auth0.loginWithRedirect()}
         logoutWithRedirect={() => auth0.logout()}
+        navigation={appState.ui.navigation}
       />
       <Switch>
         <Route path="/categories" exact>
@@ -157,6 +155,18 @@ export function App() {
           <DevDebugger data={appState.location} />
           <DevDebugger data={appState.size} />
           <DevDebugger data={appState.type} />
+
+          <Buttons key="primary button" type="primary">primary</Buttons>
+          <Buttons key="secondary button" type="secondary">secondary</Buttons>
+          <Buttons key="accent button" type="accent">accent</Buttons>
+          <Buttons key="info button" type="info">info</Buttons>
+          <Buttons key="success button" type="success">success</Buttons>
+          <Buttons key="warning button" type="warning">warning</Buttons>
+          <Buttons key="error button" type="error">error</Buttons>
+          <Buttons key="ghost button" type="ghost">ghost</Buttons>
+          <Buttons key="link button" type="link">link</Buttons>
+          <Buttons key="outline button" type="outline">outline</Buttons>
+
         </Route>
       </Switch>
     </React.Suspense>

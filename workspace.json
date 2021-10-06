@@ -8,14 +8,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/data-access-auth0/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "libs/data-access-auth0/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/data-access-auth0"],
+          "outputs": [
+            "coverage/libs/data-access-auth0"
+          ],
           "options": {
             "jestConfig": "libs/data-access-auth0/jest.config.js",
             "passWithNoTests": true
@@ -30,7 +36,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
             "lintFilePatterns": [
               "libs/data-access-inventory/**/*.{ts,tsx,js,jsx}"
@@ -39,7 +47,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/data-access-inventory"],
+          "outputs": [
+            "coverage/libs/data-access-inventory"
+          ],
           "options": {
             "jestConfig": "libs/data-access-inventory/jest.config.js",
             "passWithNoTests": true
@@ -54,12 +64,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/gateway",
             "main": "apps/gateway/src/main.ts",
             "tsConfig": "apps/gateway/tsconfig.app.json",
-            "assets": ["apps/gateway/src/assets"]
+            "assets": [
+              "apps/gateway/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -83,14 +97,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/gateway/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/gateway/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/gateway"],
+          "outputs": [
+            "coverage/apps/gateway"
+          ],
           "options": {
             "jestConfig": "apps/gateway/jest.config.js",
             "passWithNoTests": true
@@ -105,7 +125,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/inventory-admin",
             "index": "apps/inventory-admin/src/index.html",
@@ -116,7 +138,9 @@
               "apps/inventory-admin/src/favicon.ico",
               "apps/inventory-admin/src/assets"
             ],
-            "styles": ["apps/inventory-admin/src/styles.scss"],
+            "styles": [
+              "apps/inventory-admin/src/styles.scss"
+            ],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -160,14 +184,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/inventory-admin/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/inventory-admin/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/inventory-admin"],
+          "outputs": [
+            "coverage/apps/inventory-admin"
+          ],
           "options": {
             "jestConfig": "apps/inventory-admin/jest.config.js",
             "passWithNoTests": true
@@ -194,9 +224,13 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/inventory-admin-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/inventory-admin-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -208,12 +242,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/inventory-service",
             "main": "apps/inventory-service/src/main.ts",
             "tsConfig": "apps/inventory-service/tsconfig.app.json",
-            "assets": ["apps/inventory-service/src/assets"]
+            "assets": [
+              "apps/inventory-service/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -237,14 +275,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/inventory-service/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/inventory-service/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/inventory-service"],
+          "outputs": [
+            "coverage/apps/inventory-service"
+          ],
           "options": {
             "jestConfig": "apps/inventory-service/jest.config.js",
             "passWithNoTests": true
@@ -259,7 +303,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/inventory-shell",
             "index": "apps/inventory-shell/src/index.html",
@@ -270,7 +316,9 @@
               "apps/inventory-shell/src/favicon.ico",
               "apps/inventory-shell/src/assets"
             ],
-            "styles": ["apps/inventory-shell/src/styles.scss"],
+            "styles": [
+              "apps/inventory-shell/src/styles.scss"
+            ],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -314,14 +362,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/inventory-shell/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/inventory-shell/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/inventory-shell"],
+          "outputs": [
+            "coverage/apps/inventory-shell"
+          ],
           "options": {
             "jestConfig": "apps/inventory-shell/jest.config.js",
             "passWithNoTests": true
@@ -349,9 +403,13 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/inventory-shell-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/inventory-shell-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -363,14 +421,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/shared/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/shared/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared"],
+          "outputs": [
+            "coverage/libs/shared"
+          ],
           "options": {
             "jestConfig": "libs/shared/jest.config.js",
             "passWithNoTests": true
@@ -385,14 +449,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/ui-components/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "libs/ui-components/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui-components"],
+          "outputs": [
+            "coverage/libs/ui-components"
+          ],
           "options": {
             "jestConfig": "libs/ui-components/jest.config.js",
             "passWithNoTests": true
@@ -407,14 +477,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/ui-hooks/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "libs/ui-hooks/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui-hooks"],
+          "outputs": [
+            "coverage/libs/ui-hooks"
+          ],
           "options": {
             "jestConfig": "libs/ui-hooks/jest.config.js",
             "passWithNoTests": true

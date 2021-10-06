@@ -14,7 +14,12 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
         "accessToken": "NjhmYzIzMWItYWVkNC00NzQ0LWJlMWEtOTA0ZmEzODhhZmVhfHJlYWQtd3JpdGU="
       }
     }
@@ -32,33 +37,57 @@
       "tags": []
     },
     "data-access-inventory": {
-      "tags": ["inventory", "state"]
+      "tags": [
+        "inventory",
+        "state"
+      ]
     },
     "gateway": {
       "tags": []
     },
     "inventory-admin": {
-      "tags": ["ui", "inventory", "administration"]
+      "tags": [
+        "ui",
+        "inventory",
+        "administration"
+      ]
     },
     "inventory-admin-e2e": {
-      "tags": ["inventory", "testing"],
-      "implicitDependencies": ["inventory-admin"]
+      "tags": [
+        "inventory",
+        "testing"
+      ],
+      "implicitDependencies": [
+        "inventory-admin"
+      ]
     },
     "inventory-service": {
       "tags": []
     },
     "inventory-shell": {
-      "tags": ["ui", "inventory"]
+      "tags": [
+        "ui",
+        "inventory"
+      ]
     },
     "inventory-shell-e2e": {
-      "tags": ["inventory", "testing"],
-      "implicitDependencies": ["inventory-shell"]
+      "tags": [
+        "inventory",
+        "testing"
+      ],
+      "implicitDependencies": [
+        "inventory-shell"
+      ]
     },
     "shared": {
-      "tags": ["shared"]
+      "tags": [
+        "shared"
+      ]
     },
     "ui-components": {
-      "tags": ["ui"]
+      "tags": [
+        "ui"
+      ]
     },
     "ui-hooks": {
       "tags": []

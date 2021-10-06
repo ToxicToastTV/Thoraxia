@@ -41,7 +41,8 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "outdated": "npm outdated",
-    "update:all": "npx npm-check-updates -u"
+    "update:all": "npx npm-check-updates -u",
+    "build:css": "npx tailwindcss -o ./apps/inventory-shell/src/styles.scss && npx tailwindcss -o ./apps/inventory-admin/src/styles.scss"
   },
   "private": true,
   "dependencies": {
@@ -56,6 +57,7 @@
     "@types/axios": "^0.14.0",
     "axios": "^0.22.0",
     "core-js": "^3.18.1",
+    "daisyui": "^1.14.2",
     "mysql2": "^2.3.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",

@@ -7,7 +7,6 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class InventoryGuard implements CanActivate {
-
   constructor(private reflector: Reflector) {}
 
   private encodeToken(bearerToken: string): any {
@@ -17,9 +16,12 @@ export class InventoryGuard implements CanActivate {
     return decoded || null;
   }
 
-  canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
+  canActivate(
+    context: ExecutionContext
+  ): boolean | Promise<boolean> | Observable<boolean> {
     const roles = this.reflector.get<string>('roles', context.getHandler());
-    const bearerToken = context.switchToHttp().getRequest().headers?.authorization || 'Bearer ';
+    const bearerToken =
+      context.switchToHttp().getRequest().headers?.authorization || 'Bearer ';
     const user = this.encodeToken(bearerToken);
     if (!roles) {
       return true;
@@ -30,5 +32,4 @@ export class InventoryGuard implements CanActivate {
     const userRoles = user['http://localhost:4200/roles'];
     return userRoles.includes(roles);
   }
-
 }

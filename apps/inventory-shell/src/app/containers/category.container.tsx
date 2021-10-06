@@ -15,7 +15,7 @@ function CategoryContainer(props: Props) {
     <>
       <Show show={!props.isLoading}>
         <Show show={props.data.length === 0}>
-          <Alerts type="danger" header="No entities found" />
+          <Alerts type="error" text="No entities found" />
         </Show>
         <Show show={props.data.length > 0}>
           <div className="min-h-screen bg-gray-100 flex flex-col justify-start">

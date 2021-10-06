@@ -6,6 +6,7 @@ module.exports = {
     './apps/inventory-admin/src/index.html',
     './apps/inventory-shell/src/**/*.{js,jsx,ts,tsx}',
     './apps/inventory-shell/src/index.html',
+    './libs/ui-components/src/lib/**/*.{js,jsx,ts,tsx}'
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -18,5 +19,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('daisyui')
+  ],
 };

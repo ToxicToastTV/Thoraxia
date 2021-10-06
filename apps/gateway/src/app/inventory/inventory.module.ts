@@ -13,22 +13,16 @@ import { InventoryGuard } from './inventory.guard';
         options: {
           client: {
             clientId: 'inventory',
-            brokers: [
-              environment.KAFKA_URI
-            ],
+            brokers: [environment.KAFKA_URI],
           },
           consumer: {
             groupId: 'inventory-consumer',
-          }
-        }
-      }
+          },
+        },
+      },
     ]),
   ],
-  controllers: [
-    CategoryController
-  ],
-  providers: [
-    InventoryGuard
-  ],
+  controllers: [CategoryController],
+  providers: [InventoryGuard],
 })
 export class InventoryModule {}
