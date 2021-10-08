@@ -18,12 +18,10 @@ function CategoryContainer(props: Props) {
           <Alerts type="error" text="No entities found" />
         </Show>
         <Show show={props.data.length > 0}>
-          <div className="min-h-screen bg-gray-100 flex flex-col justify-start">
-            <div className="relative m-3 flex flex-wrap mx-auto justify-center">
-              {props.data.map(item => (
-                <Cards hasPicture={true} header={item.title} onClick={() => push(`/categories/${item.id}`)} />
-              ))}
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+            {props.data.map(item => (
+              <Cards hasPicture={item.picture !== null} picturePath={item.picture !== null ? item.picture : undefined} header={item.title} onClick={() => push(`/categories/${item.id}`)} />
+            ))}
           </div>
         </Show>
       </Show>

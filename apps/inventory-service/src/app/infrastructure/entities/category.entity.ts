@@ -19,6 +19,9 @@ export class CategoryEntity {
   @Column()
   slug: string;
 
+  @Column({ default: null, nullable: true })
+  picture: string | null;
+
   @Column({ default: false, type: 'boolean' })
   active: boolean;
 

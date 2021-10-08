@@ -7,8 +7,8 @@ import { CategoryDomain } from '../aggregates/category.domain';
 export class CategoryFactory implements BaseFactory<CategoryModel, CategoryDomain, CreateCategory> {
 
   public reconstitute(anemic: CategoryModel): CategoryDomain {
-    const { id, title, slug, active, created_at, updated_at, deleted_at } = anemic;
-    return new CategoryDomain(id, title, slug, active, created_at, updated_at, deleted_at);
+    const { id, title, slug, picture, active, created_at, updated_at, deleted_at } = anemic;
+    return new CategoryDomain(id, title, slug, picture, active, created_at, updated_at, deleted_at);
   }
 
   public constitute(domain: CategoryDomain): CategoryModel {
@@ -16,8 +16,8 @@ export class CategoryFactory implements BaseFactory<CategoryModel, CategoryDomai
   }
 
   public createFactory(data: CreateCategory): CategoryDomain {
-    const { id, title, slug } = data;
-    const domain = new CategoryDomain(id, title, slug, false, new Date(), null, null);
+    const { id, title, slug, picture } = data;
+    const domain = new CategoryDomain(id, title, slug, picture, false, new Date(), null, null);
     domain.createCategory();
     return domain;
   }
