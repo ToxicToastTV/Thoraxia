@@ -47,6 +47,12 @@ export function useAuthState() {
     }
   }
 
+  function setTheme(theme: Nullable<string>): void {
+    if (appState.auth.theme !== theme) {
+      dispatch({ type: AuthTypes.SetTheme, payload: theme });
+    }
+  }
+
   return {
     setLoader,
     setStatus,
@@ -54,7 +60,8 @@ export function useAuthState() {
     setAvatar,
     setAdminStatus,
     setToken,
-    setRoles
+    setRoles,
+    setTheme
   }
 
 }

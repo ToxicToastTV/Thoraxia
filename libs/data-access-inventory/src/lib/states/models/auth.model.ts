@@ -8,6 +8,7 @@ export interface IAuthModel {
   avatar: Nullable<string>;
   token: Nullable<string>;
   roles: Array<string>;
+  theme: Nullable<string>;
 }
 
 export const initAuthState: IAuthModel = {
@@ -18,4 +19,5 @@ export const initAuthState: IAuthModel = {
   avatar: null,
   token: null,
   roles: [],
+  theme: null,
 }

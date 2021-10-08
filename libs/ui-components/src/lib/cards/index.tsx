@@ -1,7 +1,5 @@
 import React from 'react';
-import { App } from '../../../../../apps/inventory-shell/src/app/app';
 import Show from '../show';
-import { Optional } from '@thoraxia/shared';
 
 interface Props {
   hasPicture: boolean;

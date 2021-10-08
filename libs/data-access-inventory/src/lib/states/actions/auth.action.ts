@@ -8,6 +8,7 @@ export enum AuthTypes {
   SetAdminStatus = '[Auth] Set Admin Status',
   SetToken = '[Auth] Set Token',
   SetRoles = '[Auth] Set Roles',
+  SetTheme = '[Auth] Set Theme',
 }
 
 type SetStatusAction = DispatchAction<AuthTypes.SetStatus, Loader>;
@@ -17,6 +18,7 @@ type SetAvatarAction = DispatchAction<AuthTypes.SetAvatar, Nullable<string>>;
 type SetAdminStatusAction = DispatchAction<AuthTypes.SetAdminStatus, boolean>;
 type SetTokenAction = DispatchAction<AuthTypes.SetToken, Nullable<string>>;
 type SetRolesAction = DispatchAction<AuthTypes.SetRoles, Array<string>>;
+type SetThemeAction = DispatchAction<AuthTypes.SetTheme, Nullable<string>>;
 
 export type AuthActionTypes =
   SetStatusAction |
@@ -25,4 +27,5 @@ export type AuthActionTypes =
   SetAvatarAction |
   SetAdminStatusAction |
   SetTokenAction |
-  SetRolesAction;
+  SetRolesAction |
+  SetThemeAction;

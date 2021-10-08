@@ -13,6 +13,8 @@ import Workers from './workers';
 import Rest from './rest';
 import { Route, Switch } from 'react-router-dom';
 import CategoryContainer from './containers/category.container';
+import LayoutContainer from './containers/layout.container';
+import { environment } from '../environments/environment';
 
 export function App() {
   const { appState } = useAppState();
@@ -47,10 +49,12 @@ export function App() {
       auth0.getIdTokenClaims().then(data => {
         const roles = data?.['http://localhost:4200/roles'] || [];
         const isAdmin = data?.['http://localhost:4200/isAdmin'] || false;
+        const theme = data?.['http://localhost:4200/theme'] || environment.DEFAULT_THEME;
         //
         authState.setToken(data?.__raw);
         authState.setRoles(roles);
         authState.setAdminStatus(isAdmin);
+        authState.setTheme(theme);
       }).catch(error => console.error(error))
       //
       const navigation: Array<{ title: string; route: string; }> = [];
@@ -91,6 +95,15 @@ export function App() {
   }, [auth0.isLoading]);
 
   React.useEffect(() => {
+    if (appState.auth.theme !== null) {
+      const htmlElement = document.querySelector("html");
+      if (htmlElement !== null) {
+        htmlElement.setAttribute('data-theme', appState.auth.theme)
+      }
+    }
+  }, [appState.auth.theme]);
+
+  React.useEffect(() => {
     if ('error' in router.query && 'error_description' in router.query) {
       const { error, error_description } = router.query as { error: string; error_description: string; };
     }
@@ -128,47 +141,32 @@ export function App() {
     appState.company.status,
     appState.location.status,
     appState.size.status
-  ])
+  ]);
 
   return (
     <React.Suspense fallback={<Loading color="text-green-700" />}>
       <Show show={appState.auth.token !== null}>
         <Rest key="RestApi" token={appState.auth.token} />
       </Show>
-      <Navigation
-        key="Navigation"
+      <LayoutContainer
         avatar={appState.auth.avatar || ''}
-        isLoggedIn={appState.auth.loggedIn}
+        loggedIn={appState.auth.loggedIn}
         loginWithRedirect={() => auth0.loginWithRedirect()}
         logoutWithRedirect={() => auth0.logout()}
+        settingsWithRedirect={() => router.push('/settings')}
         navigation={appState.ui.navigation}
-      />
-      <Switch>
-        <Route path="/categories" exact>
-          <CategoryContainer
-            isLoading={appState.category.status === 'loading'}
-            data={appState.category.data} />
-        </Route>
-        <Route path="*">
-          <DevDebugger data={appState.company} />
-          <DevDebugger data={appState.item} />
-          <DevDebugger data={appState.location} />
-          <DevDebugger data={appState.size} />
-          <DevDebugger data={appState.type} />
-
-          <Buttons key="primary button" type="primary">primary</Buttons>
-          <Buttons key="secondary button" type="secondary">secondary</Buttons>
-          <Buttons key="accent button" type="accent">accent</Buttons>
-          <Buttons key="info button" type="info">info</Buttons>
-          <Buttons key="success button" type="success">success</Buttons>
-          <Buttons key="warning button" type="warning">warning</Buttons>
-          <Buttons key="error button" type="error">error</Buttons>
-          <Buttons key="ghost button" type="ghost">ghost</Buttons>
-          <Buttons key="link button" type="link">link</Buttons>
-          <Buttons key="outline button" type="outline">outline</Buttons>
-
-        </Route>
-      </Switch>
+        title="Thoraxia - Inventory UI"
+      >
+        <Switch>
+          <Route path="/categories" exact>
+            <CategoryContainer isLoading={appState.category.status === 'loading'} data={appState.category.data} />
+          </Route>
+          <Route path="*">
+            <Alerts type="error" text="Page not found" />
+            <DevDebugger data={appState} />
+          </Route>
+        </Switch>
+      </LayoutContainer>
     </React.Suspense>
   );
 }

@@ -8,7 +8,9 @@ interface Props {
   isLoggedIn: boolean;
   loginWithRedirect: () => void;
   logoutWithRedirect: () => void;
+  settingsWithRedirect: () => void;
   navigation: Array<{ title: string; route: string; }>;
+  title: string;
 }
 
 function Navigation(props: Props) {
@@ -18,7 +20,7 @@ function Navigation(props: Props) {
 
       <div className="flex-none hidden px-2 mx-2 lg:flex">
     <span className="text-lg font-bold">
-            Thoraxia - Inventory UI
+            {props.title}
           </span>
       </div>
 
@@ -33,7 +35,8 @@ function Navigation(props: Props) {
       </div>
 
       <Show show={props.isLoggedIn} key="ShowNotifications">
-        <div className="flex-none">
+        <div className="flex-none indicator">
+          <div className="indicator-item indicator-start indicator-top badge badge-xs badge-primary hidden"></div>
           <Buttons type="ghost" size="square" key="Notifications">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  className="inline-block w-6 h-6 stroke-current">
@@ -68,7 +71,7 @@ function Navigation(props: Props) {
 
       <Show show={props.isLoggedIn} key="ShowSettings">
         <div className="flex-none">
-          <Buttons type="ghost" size="square" key="Settings">
+          <Buttons type="ghost" size="square" key="Settings" onClick={props.settingsWithRedirect}>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

@@ -48,6 +48,12 @@ export function AuthReducer(state: IAuthModel, action: AuthActionTypes): IAuthMo
         ...state,
         roles: action.payload
       }
+
+    case AuthTypes.SetTheme:
+      return {
+        ...state,
+        theme: action.payload
+      }
   }
 
 }
