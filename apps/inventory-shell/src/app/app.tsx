@@ -14,6 +14,7 @@ import Rest from './rest';
 import { Route, Switch } from 'react-router-dom';
 import CategoryContainer from './containers/category.container';
 import LayoutContainer from './containers/layout.container';
+import ItemContainer from './containers/item.container';
 import { environment } from '../environments/environment';
 
 export function App() {
@@ -160,6 +161,12 @@ export function App() {
         <Switch>
           <Route path="/categories" exact>
             <CategoryContainer isLoading={appState.category.status === 'loading'} data={appState.category.data} />
+          </Route>
+          <Route path="/categories/:id" exact>
+            <ItemContainer isLoading={appState.item.status === 'loading'} data={appState.item.data} />
+          </Route>
+          <Route path="/items" exact>
+            <ItemContainer isLoading={appState.item.status === 'loading'} data={appState.item.data} />
           </Route>
           <Route path="*">
             <Alerts type="error" text="Page not found" />

@@ -11,6 +11,7 @@ function Rest(props: Props) {
 
   const categoryState = useCategoryState();
   const categoryApi = useSWR('inventory/category', url => fetcherUtils(url, props.token), { dedupingInterval: 0 });
+  const itemApi = useSWR('inventory/item', url => fetcherUtils(url, props.token), { dedupingInterval: 0 });
 
   const addCategoryData = React.useCallback((data: Array<any>, error: Error & { info: string; status: number }) => {
    if (data) {
@@ -25,7 +26,11 @@ function Rest(props: Props) {
 
   React.useEffect(() => {
     addCategoryData(categoryApi.data, categoryApi.error);
-  }, [categoryApi.isValidating])
+  }, [categoryApi.isValidating]);
+
+  React.useEffect(() => {
+    console.error(itemApi.data, itemApi.error);
+  }, [itemApi.isValidating]);
 
   return null;
 }
