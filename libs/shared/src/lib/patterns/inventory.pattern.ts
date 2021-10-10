@@ -1,9 +1,6 @@
-export enum InventoryPattern {
-  LIST = 'inventory.list',
-  SINGLE = 'inventory.single',
-  CREATE = 'inventory.create',
-  // Experimental
-  WEBSOCKET = 'inventory.websocket',
-  SSE = 'inventory.sse',
-  HEALTH = 'inventory.health',
+export enum CategoryPatterns {
+  LIST = 'inventory.category.list',
+  SINGLE = 'inventory.category.single',
+  CREATE = 'inventory.category.create',
+  HEALTH = 'inventory.category.health'
 }

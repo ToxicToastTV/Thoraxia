@@ -15,9 +15,9 @@ ReactDOM.render(
         clientId={environment.AUTH0_CLIENT_ID}
         redirectUri={window.location.origin}
         >
-        <BrowserRouter>
+        <HashRouter>
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </DataAccessAuth0>
     </DataAccessInventory>
   </StrictMode>,

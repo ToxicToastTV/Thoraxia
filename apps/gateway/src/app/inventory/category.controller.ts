@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { BaseRoles, InventoryPattern } from '@thoraxia/shared';
+import { BaseRoles, CategoryPatterns } from '@thoraxia/shared';
 import { Roles } from './inventory.decorator';
 import { InventoryGuard } from './inventory.guard';
 
@@ -22,17 +22,17 @@ export class CategoryController implements OnModuleInit {
   ) {}
 
   async onModuleInit(): Promise<void> {
-    this.client.subscribeToResponseOf(InventoryPattern.LIST);
-    this.client.subscribeToResponseOf(InventoryPattern.SINGLE);
-    this.client.subscribeToResponseOf(InventoryPattern.HEALTH);
+    this.client.subscribeToResponseOf(CategoryPatterns.LIST);
+    this.client.subscribeToResponseOf(CategoryPatterns.SINGLE);
+    this.client.subscribeToResponseOf(CategoryPatterns.HEALTH);
     await this.client.connect();
   }
 
 @Get('health')
 public async getHealth(): Promise<any> {
-  Logger.debug(InventoryPattern.HEALTH);
+  Logger.debug(CategoryPatterns.HEALTH);
   return await this.client
-    .send(InventoryPattern.HEALTH, {})
+    .send(CategoryPatterns.HEALTH, {})
     .toPromise()
     .catch((error) => {
       Logger.error(error);
@@ -45,9 +45,9 @@ public async getHealth(): Promise<any> {
   @Get()
   @Roles(BaseRoles.ACCESS)
   public async getCategories(): Promise<any> {
-    Logger.debug(InventoryPattern.LIST);
+    Logger.debug(CategoryPatterns.LIST);
     return await this.client
-      .send(InventoryPattern.LIST, {})
+      .send(CategoryPatterns.LIST, {})
       .toPromise()
       .catch((error) => {
         Logger.error(error);
@@ -65,9 +65,9 @@ public async getHealth(): Promise<any> {
   @Get(':id')
   @Roles(BaseRoles.ACCESS)
   public async getCategory(@Param('id') id: string): Promise<any> {
-    Logger.debug(InventoryPattern.SINGLE);
+    Logger.debug(CategoryPatterns.SINGLE);
     return await this.client
-      .send(InventoryPattern.SINGLE, { id })
+      .send(CategoryPatterns.SINGLE, { id })
       .toPromise()
       .catch((error) => {
         Logger.error(error);

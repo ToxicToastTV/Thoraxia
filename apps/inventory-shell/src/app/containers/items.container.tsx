@@ -1,12 +1,13 @@
 import React from 'react';
 import { DevDebugger } from '@thoraxia/ui-components/*';
+import { Nullable } from '@thoraxia/shared';
 
 interface Props {
   isLoading: boolean;
   data: Array<any>;
 }
 
-function ItemContainer(props: Props) {
+function ItemsContainer(props: Props) {
 
   return (
     <>
@@ -15,5 +16,5 @@ function ItemContainer(props: Props) {
   );
 }
 
-export default React.memo(ItemContainer);
+export default React.memo(ItemsContainer);
 

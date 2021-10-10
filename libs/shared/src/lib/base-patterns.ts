@@ -1,3 +1,3 @@
-import { InventoryPattern } from './patterns/inventory.pattern';
+import { CategoryPatterns } from './patterns/inventory.pattern';
 
-export type BasePatterns = InventoryPattern;
+export type BasePatternsInventory = CategoryPatterns;

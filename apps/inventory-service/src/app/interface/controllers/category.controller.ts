@@ -1,6 +1,6 @@
 import { Controller, Logger } from '@nestjs/common';
-import { Ctx, KafkaContext, MessagePattern, Payload, RpcException } from '@nestjs/microservices';
-import { InventoryPattern } from '@thoraxia/shared';
+import { Ctx, KafkaContext, MessagePattern, Payload } from '@nestjs/microservices';
+import { CategoryPatterns } from '@thoraxia/shared';
 import { CreateCategory, SingleCategory } from '../dtos/category.dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { GetCategoriesQuery } from '../../application/queries/impl/get-categories.query';
@@ -14,7 +14,7 @@ export class CategoryController {
     private readonly queryBus: QueryBus,
   ) {  }
 
-  @MessagePattern(InventoryPattern.LIST)
+  @MessagePattern(CategoryPatterns.LIST)
   async listCategories(@Payload('value') payload: any, @Ctx() context: KafkaContext) {
     try {
       Logger.debug(context.getTopic())
@@ -33,7 +33,7 @@ export class CategoryController {
     }
   }
 
-  @MessagePattern(InventoryPattern.SINGLE)
+  @MessagePattern(CategoryPatterns.SINGLE)
   async singleCategory(@Payload('value') payload: SingleCategory, @Ctx() context: KafkaContext) {
     try {
       Logger.debug(context.getTopic())
@@ -52,7 +52,7 @@ export class CategoryController {
     }
   }
 
-  @MessagePattern(InventoryPattern.CREATE)
+  @MessagePattern(CategoryPatterns.CREATE)
   async createCategory(@Payload('value') payload: CreateCategory, @Ctx() context: KafkaContext) {
     Logger.debug(context.getTopic())
     // return this.onCommand('', payload);

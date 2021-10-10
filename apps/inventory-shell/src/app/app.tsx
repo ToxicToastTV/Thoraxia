@@ -13,12 +13,16 @@ import Workers from './workers';
 import Rest from './rest';
 import { Route, Switch } from 'react-router-dom';
 import CategoryContainer from './containers/category.container';
+import CategoriesContainer from './containers/categories.container';
 import LayoutContainer from './containers/layout.container';
-import ItemContainer from './containers/item.container';
+import ItemsContainer from './containers/items.container';
 import { environment } from '../environments/environment';
+import { useParams } from 'react-router';
+import { Nullable, Optional } from '@thoraxia/shared';
 
 export function App() {
   const { appState } = useAppState();
+  const { id } = useParams<{ id: Optional<string>; }>();
   const router = useRouter();
   const uiState = useUiState();
   const authState = useAuthState();
@@ -144,6 +148,11 @@ export function App() {
     appState.size.status
   ]);
 
+  const getIdParam = React.useCallback((index: number) => {
+    const locationArray = router.location.pathname.split('/');
+    return locationArray[index] || null ;
+  }, [router.query]);
+
   return (
     <React.Suspense fallback={<Loading color="text-green-700" />}>
       <Show show={appState.auth.token !== null}>
@@ -159,14 +168,14 @@ export function App() {
         title="Thoraxia - Inventory UI"
       >
         <Switch>
-          <Route path="/categories" exact>
-            <CategoryContainer isLoading={appState.category.status === 'loading'} data={appState.category.data} />
+          <Route exact path="/categories">
+            <CategoriesContainer isLoading={appState.category.status === 'loading'} data={appState.category.data} />
           </Route>
-          <Route path="/categories/:id" exact>
-            <ItemContainer isLoading={appState.item.status === 'loading'} data={appState.item.data} />
+          <Route exact path="/categories/:id">
+            <CategoryContainer isLoading={appState.item.status === 'loading'} data={appState.item.data} id={getIdParam(2)} />
           </Route>
           <Route path="/items" exact>
-            <ItemContainer isLoading={appState.item.status === 'loading'} data={appState.item.data} />
+            <ItemsContainer isLoading={appState.item.status === 'loading'} data={appState.item.data} />
           </Route>
           <Route path="*">
             <Alerts type="error" text="Page not found" />

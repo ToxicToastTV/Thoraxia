@@ -1,7 +1,7 @@
-import { HealthCheck, HealthCheckService, TypeOrmHealthIndicator } from '@nestjs/terminus';
+import { HealthCheckService, TypeOrmHealthIndicator } from '@nestjs/terminus';
 import { Controller, Logger } from '@nestjs/common';
 import { Ctx, KafkaContext, MessagePattern, Payload } from '@nestjs/microservices';
-import { InventoryPattern } from '@thoraxia/shared';
+import { CategoryPatterns } from '@thoraxia/shared';
 import { SingleCategory } from '../dtos/category.dto';
 
 @Controller()
@@ -12,7 +12,7 @@ export class HealthController {
     private readonly db: TypeOrmHealthIndicator,
   ) { }
 
-  @MessagePattern(InventoryPattern.HEALTH)
+  @MessagePattern(CategoryPatterns.HEALTH)
   async check(@Payload('value') payload: SingleCategory, @Ctx() context: KafkaContext) {
     Logger.debug(context.getTopic())
     return this.health.check([
