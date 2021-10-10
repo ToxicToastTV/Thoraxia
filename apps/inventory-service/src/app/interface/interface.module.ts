@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { CategoryController } from './controllers/category.controller';
 import { CqrsModule } from '@nestjs/cqrs';
+import { CategoryController } from './controllers/category.controller';
+import { LocationController } from './controllers/location.category';
 
 
 
@@ -10,6 +11,7 @@ import { CqrsModule } from '@nestjs/cqrs';
   ],
   controllers: [
     CategoryController,
+    LocationController
   ],
   exports: [],
 })
