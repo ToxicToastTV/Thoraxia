@@ -24,8 +24,23 @@ export class CategoryController implements OnModuleInit {
   async onModuleInit(): Promise<void> {
     this.client.subscribeToResponseOf(InventoryPattern.LIST);
     this.client.subscribeToResponseOf(InventoryPattern.SINGLE);
+    this.client.subscribeToResponseOf(InventoryPattern.HEALTH);
     await this.client.connect();
   }
+
+@Get('health')
+public async getHealth(): Promise<any> {
+  Logger.debug(InventoryPattern.HEALTH);
+  return await this.client
+    .send(InventoryPattern.HEALTH, {})
+    .toPromise()
+    .catch((error) => {
+      Logger.error(error);
+    })
+    .then((data) => {
+      return data;
+    });
+}
 
   @Get()
   @Roles(BaseRoles.ACCESS)

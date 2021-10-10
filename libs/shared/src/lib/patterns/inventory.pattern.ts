@@ -5,4 +5,5 @@ export enum InventoryPattern {
   // Experimental
   WEBSOCKET = 'inventory.websocket',
   SSE = 'inventory.sse',
+  HEALTH = 'inventory.health',
 }
