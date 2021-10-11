@@ -10,7 +10,6 @@ import { NotFoundException } from '@nestjs/common';
 @QueryHandler(GetCategoriesQuery)
 export class GetCategoriesHandler implements IQueryHandler<GetCategoriesQuery> {
 
-  // TODO: Add Factory and Repository
   constructor(
     private readonly eventPublisher: EventPublisher,
     private readonly factory: CategoryFactory,

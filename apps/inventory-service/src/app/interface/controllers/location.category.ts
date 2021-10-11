@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
-@Controller()
+@Controller('location')
 export class LocationController {
 
   public constructor(

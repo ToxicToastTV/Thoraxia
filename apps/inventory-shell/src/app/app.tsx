@@ -9,13 +9,9 @@ import {
 import React from 'react';
 import { useRouter } from '@thoraxia/ui-hooks';
 import { useAuth0 } from '@auth0/auth0-react';
-import Workers from './workers';
 import Rest from './rest';
 import { Route, Switch } from 'react-router-dom';
-import CategoryContainer from './containers/category.container';
-import CategoriesContainer from './containers/categories.container';
 import LayoutContainer from './containers/layout.container';
-import ItemsContainer from './containers/items.container';
 import { environment } from '../environments/environment';
 import { useParams } from 'react-router';
 import { Nullable, Optional } from '@thoraxia/shared';
@@ -28,30 +24,13 @@ export function App() {
   const authState = useAuthState();
   const auth0 = useAuth0();
 
-  const socketWorker = React.useCallback(() => {
-    /*workerUtils<any>(
-      '/assets/workers/websocket-worker.js',
-      'wss://websocket.icos-dev.dpp.porsche.com/icos?token=' + token,
-      (data => {
-        if (typeof data !== 'undefined') {
-          console.debug(data)
-        }
-
-      })
-    );*/
-  }, []);
-
-  React.useEffect(() => {
-    socketWorker();
-    //
-  }, []);
-
   React.useEffect(() => {
     authState.setStatus(auth0.isAuthenticated);
     if (auth0.isAuthenticated) {
       authState.setUserName(auth0?.user?.nickname || '');
       authState.setAvatar(auth0?.user?.picture || '');
       auth0.getIdTokenClaims().then(data => {
+        const avatar = data?.['http://localhost:4200/avatar'] || null;
         const roles = data?.['http://localhost:4200/roles'] || [];
         const isAdmin = data?.['http://localhost:4200/isAdmin'] || false;
         const theme = data?.['http://localhost:4200/theme'] || environment.DEFAULT_THEME;
@@ -60,6 +39,9 @@ export function App() {
         authState.setRoles(roles);
         authState.setAdminStatus(isAdmin);
         authState.setTheme(theme);
+        if(avatar !== null) {
+          authState.setAvatar(avatar);
+        }
       }).catch(error => console.error(error))
       //
       const navigation: Array<{ title: string; route: string; }> = [];
@@ -153,8 +135,14 @@ export function App() {
     return locationArray[index] || null ;
   }, [router.query]);
 
+  const CategoriesContainer = React.lazy(() => import('./containers/categories.container'));
+  const CategoryContainer =  React.lazy(() => import('./containers/category.container'));
+  const ItemsContainer = React.lazy(() => import('./containers/items.container'));
+
+
+
   return (
-    <React.Suspense fallback={<Loading color="text-green-700" />}>
+    <React.Suspense fallback={<Loading color="text-primary" />}>
       <Show show={appState.auth.token !== null}>
         <Rest key="RestApi" token={appState.auth.token} />
       </Show>
@@ -169,13 +157,19 @@ export function App() {
       >
         <Switch>
           <Route exact path="/categories">
-            <CategoriesContainer isLoading={appState.category.status === 'loading'} data={appState.category.data} />
+            <React.Suspense fallback={<Loading color="text-primary" />}>
+              <CategoriesContainer isLoading={appState.category.status === 'loading'} data={appState.category.data} />
+            </React.Suspense>
           </Route>
           <Route exact path="/categories/:id">
-            <CategoryContainer isLoading={appState.item.status === 'loading'} data={appState.item.data} id={getIdParam(2)} />
+            <React.Suspense fallback={<Loading color="text-primary" />}>
+              <CategoryContainer isLoading={appState.item.status === 'loading'} data={appState.item.data.filter(item => item.category_id === getIdParam(2))} id={getIdParam(2)} />
+            </React.Suspense>
           </Route>
           <Route path="/items" exact>
-            <ItemsContainer isLoading={appState.item.status === 'loading'} data={appState.item.data} />
+            <React.Suspense fallback={<Loading color="text-primary" />}>
+              <ItemsContainer isLoading={appState.item.status === 'loading'} data={appState.item.data} />
+            </React.Suspense>
           </Route>
           <Route path="*">
             <Alerts type="error" text="Page not found" />

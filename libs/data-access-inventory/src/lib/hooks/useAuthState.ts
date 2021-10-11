@@ -54,6 +54,7 @@ export function useAuthState() {
   }
 
   return {
+    state: appState,
     setLoader,
     setStatus,
     setUserName,

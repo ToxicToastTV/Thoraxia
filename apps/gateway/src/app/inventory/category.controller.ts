@@ -73,7 +73,11 @@ public async getHealth(): Promise<any> {
         Logger.error(error);
       })
       .then((data) => {
-        Logger.debug(data);
+        if ('error' in data) {
+          const status = data?.error?.status || 500;
+          const message = data?.error?.message || '';
+          throw new HttpException(message, status);
+        }
         return data;
       });
   }

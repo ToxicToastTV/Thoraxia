@@ -1,4 +1,4 @@
-import { useCategoryState } from '@thoraxia/data-access-inventory';
+import { useAppState, useCategoryState } from '@thoraxia/data-access-inventory';
 import useSWR from 'swr';
 import { fetcherUtils, Nullable } from '@thoraxia/shared';
 import React from 'react';
@@ -8,10 +8,12 @@ interface Props {
 }
 
 function Rest(props: Props) {
-
+  const appState = useAppState();
   const categoryState = useCategoryState();
   const categoryApi = useSWR('inventory/category', url => fetcherUtils(url, props.token), { dedupingInterval: 0 });
   const itemApi = useSWR('inventory/item', url => fetcherUtils(url, props.token), { dedupingInterval: 0 });
+
+  //
 
   const addCategoryData = React.useCallback((data: Array<any>, error: Error & { info: string; status: number }) => {
    if (data) {
@@ -24,6 +26,8 @@ function Rest(props: Props) {
    }
   }, []);
 
+  //
+
   React.useEffect(() => {
     addCategoryData(categoryApi.data, categoryApi.error);
   }, [categoryApi.isValidating]);
@@ -31,6 +35,13 @@ function Rest(props: Props) {
   React.useEffect(() => {
     console.error(itemApi.data, itemApi.error);
   }, [itemApi.isValidating]);
+
+  //
+
+  React.useEffect(() => {
+    // const categoryItemApi = useSWR('inventory/item/' + props.id + '/category', url => fetcherUtils(url, appState.auth.token ), { dedupingInterval: 0 });
+  }, []);
+
 
   return null;
 }
