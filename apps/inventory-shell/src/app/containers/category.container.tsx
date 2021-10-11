@@ -1,6 +1,7 @@
 import React from 'react';
 import { DevDebugger, Show, Alerts } from '@thoraxia/ui-components/*';
 import { fetcherUtils, Nullable } from '@thoraxia/shared';
+import { useAppState, useItemState } from '@thoraxia/data-access-inventory';
 
 interface Props {
   isLoading: boolean;
@@ -9,13 +10,20 @@ interface Props {
 }
 
 function CategoryContainer(props: Props) {
+  const { appState } = useAppState();
+  const itemState = useItemState();
 
   React.useEffect(() => {
-    console.error('selectedCategory', props.id);
-  }, [props.id])
+    itemState.selectCategory(props.id);
+    return () => {
+      itemState.selectCategory(null);
+    }
+  }, [props.id]);
 
   return (
     <>
+      <DevDebugger data={appState.item} />
+      <DevDebugger data={props} />
       <Show show={!props.isLoading}>
         <Show show={props.data.length === 0}>
           <Alerts type="error" text="No entities found" />

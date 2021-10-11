@@ -20,10 +20,6 @@ export class CategoryController {
       Logger.debug(context.getTopic())
       return await this.queryBus.execute(new GetCategoriesQuery());
     } catch (e) {
-      /*throw new RpcException({
-        status: e.status,
-        message: e.message,
-      });*/
       return {
         error: {
           status: e.status,

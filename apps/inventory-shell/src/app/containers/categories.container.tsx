@@ -19,7 +19,7 @@ function CategoriesContainer(props: Props) {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             {props.data.map(item => (
               <Link to={`/categories/${item.id}`}>
-                <Cards hasPicture={item.picture !== null} picturePath={item.picture !== null ? item.picture : undefined} header={item.title} />
+                <Cards key={item.id} hasPicture={item.picture !== null} picturePath={item.picture !== null ? item.picture : undefined} header={item.title} />
               </Link>
             ))}
           </div>

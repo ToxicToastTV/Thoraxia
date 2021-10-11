@@ -14,7 +14,12 @@ export class HealthController {
   check() {
     return this.health.check([
       () => this.http.pingCheck('ToxicToast.de', 'https://www.toxictoast.de'),
-      () => this.http.pingCheck('Inventory - Category Microservice', 'http://localhost:3333/api/inventory/category/health')
+      () => this.http.pingCheck('Inventory - Category Microservice', 'http://localhost:3333/api/inventory/category/health'),
+      () => this.http.pingCheck('Inventory - Item Microservice', 'http://localhost:3333/api/inventory/item/health'),
+      () => this.http.pingCheck('Inventory - Company Microservice', 'http://localhost:3333/api/inventory/category/health'),
+      () => this.http.pingCheck('Inventory - Location Microservice', 'http://localhost:3333/api/inventory/category/health'),
+      () => this.http.pingCheck('Inventory - Type Microservice', 'http://localhost:3333/api/inventory/category/health'),
+      () => this.http.pingCheck('Inventory - Size Microservice', 'http://localhost:3333/api/inventory/category/health'),
     ]);
   }
 

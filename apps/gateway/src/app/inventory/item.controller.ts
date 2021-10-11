@@ -1,8 +1,8 @@
-import { Controller, Get, Inject, Logger, OnModuleInit, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpException, Inject, Logger, OnModuleInit, Param, UseGuards } from '@nestjs/common';
 import { InventoryGuard } from './inventory.guard';
 import { ClientKafka } from '@nestjs/microservices';
 import { Roles } from './inventory.decorator';
-import { BaseRoles } from '@thoraxia/shared';
+import { BaseRoles, ItemPatterns } from '@thoraxia/shared';
 
 @Controller('inventory/item')
 @UseGuards(InventoryGuard)
@@ -14,31 +14,85 @@ export class ItemController implements OnModuleInit {
   ) {}
 
   async onModuleInit(): Promise<void> {
-    // await this.client.connect();
+    this.client.subscribeToResponseOf(ItemPatterns.LIST);
+    this.client.subscribeToResponseOf(ItemPatterns.SINGLE);
+    this.client.subscribeToResponseOf(ItemPatterns.HEALTH);
+    this.client.subscribeToResponseOf(ItemPatterns.CATEGORY);
+    await this.client.connect();
   }
 
   @Get('health')
   public async getHealth(): Promise<any> {
-    Logger.debug('UNKNOWNPATTERN.HEALTH');
-    return null;
+    Logger.debug(ItemPatterns.HEALTH);
+    return await this.client
+      .send(ItemPatterns.HEALTH, {})
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+      })
+      .then((data) => {
+        return data;
+      });
   }
 
   @Get()
   @Roles(BaseRoles.ACCESS)
   public async getItems(): Promise<any> {
-    return [];
+    Logger.debug(ItemPatterns.LIST);
+    return await this.client
+      .send(ItemPatterns.LIST, {})
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+      })
+      .then((data) => {
+        if ('error' in data) {
+          const status = data?.error?.status || 500;
+          const message = data?.error?.message || '';
+          throw new HttpException(message, status);
+        }
+        return data;
+      });
   }
 
   @Get(':id')
   @Roles(BaseRoles.ACCESS)
   public async getItem(@Param('id') id: string): Promise<any> {
-    return [];
+    Logger.debug(ItemPatterns.SINGLE);
+    return await this.client
+      .send(ItemPatterns.SINGLE, {})
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+      })
+      .then((data) => {
+        if ('error' in data) {
+          const status = data?.error?.status || 500;
+          const message = data?.error?.message || '';
+          throw new HttpException(message, status);
+        }
+        return data;
+      });
   }
 
   @Get(':id/category')
   @Roles(BaseRoles.ACCESS)
   public async getItemByCategory(@Param('id') id: string): Promise<any> {
-    return [];
+    Logger.debug(ItemPatterns.CATEGORY);
+    return await this.client
+      .send(ItemPatterns.CATEGORY, {})
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+      })
+      .then((data) => {
+        if ('error' in data) {
+          const status = data?.error?.status || 500;
+          const message = data?.error?.message || '';
+          throw new HttpException(message, status);
+        }
+        return data;
+      });
   }
 
   @Get(':id/company')

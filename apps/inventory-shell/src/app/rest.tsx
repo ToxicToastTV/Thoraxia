@@ -1,18 +1,20 @@
-import { useAppState, useCategoryState } from '@thoraxia/data-access-inventory';
+import { useAppState, useCategoryState, useItemState } from '@thoraxia/data-access-inventory';
 import useSWR from 'swr';
 import { fetcherUtils, Nullable } from '@thoraxia/shared';
 import React from 'react';
 
 interface Props {
   token: Nullable<string>;
+  categoryId: Nullable<string>;
 }
 
 function Rest(props: Props) {
   const appState = useAppState();
   const categoryState = useCategoryState();
+  const itemState = useItemState();
+  //
   const categoryApi = useSWR('inventory/category', url => fetcherUtils(url, props.token), { dedupingInterval: 0 });
   const itemApi = useSWR('inventory/item', url => fetcherUtils(url, props.token), { dedupingInterval: 0 });
-
   //
 
   const addCategoryData = React.useCallback((data: Array<any>, error: Error & { info: string; status: number }) => {
@@ -26,6 +28,17 @@ function Rest(props: Props) {
    }
   }, []);
 
+  const addItemData = React.useCallback((data: Array<any>, error: Error & { info: string; status: number }) => {
+    if (data) {
+      itemState.setData(data.filter(item => item.active));
+      itemState.setStatus('loaded');
+    }
+    if (error) {
+      itemState.setData([]);
+      itemState.setStatus('error');
+    }
+  }, []);
+
   //
 
   React.useEffect(() => {
@@ -33,14 +46,8 @@ function Rest(props: Props) {
   }, [categoryApi.isValidating]);
 
   React.useEffect(() => {
-    console.error(itemApi.data, itemApi.error);
+    addItemData(itemApi.data, itemApi.error);
   }, [itemApi.isValidating]);
-
-  //
-
-  React.useEffect(() => {
-    // const categoryItemApi = useSWR('inventory/item/' + props.id + '/category', url => fetcherUtils(url, appState.auth.token ), { dedupingInterval: 0 });
-  }, []);
 
 
   return null;

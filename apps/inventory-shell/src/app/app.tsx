@@ -144,7 +144,11 @@ export function App() {
   return (
     <React.Suspense fallback={<Loading color="text-primary" />}>
       <Show show={appState.auth.token !== null}>
-        <Rest key="RestApi" token={appState.auth.token} />
+        <Rest
+          key="RestApi"
+          token={appState.auth.token}
+          categoryId={appState.item.selectedCategory}
+        />
       </Show>
       <LayoutContainer
         avatar={appState.auth.avatar || ''}
@@ -158,17 +162,17 @@ export function App() {
         <Switch>
           <Route exact path="/categories">
             <React.Suspense fallback={<Loading color="text-primary" />}>
-              <CategoriesContainer isLoading={appState.category.status === 'loading'} data={appState.category.data} />
+              <CategoriesContainer key="CategoriesContainer" isLoading={appState.category.status === 'loading'} data={appState.category.data} />
             </React.Suspense>
           </Route>
           <Route exact path="/categories/:id">
             <React.Suspense fallback={<Loading color="text-primary" />}>
-              <CategoryContainer isLoading={appState.item.status === 'loading'} data={appState.item.data.filter(item => item.category_id === getIdParam(2))} id={getIdParam(2)} />
+              <CategoryContainer key="CategoryContainer" isLoading={appState.item.status === 'loading'} data={appState.item.data.filter(item => item.category_id === appState.item.selectedCategory)} id={getIdParam(2)} />
             </React.Suspense>
           </Route>
           <Route path="/items" exact>
             <React.Suspense fallback={<Loading color="text-primary" />}>
-              <ItemsContainer isLoading={appState.item.status === 'loading'} data={appState.item.data} />
+              <ItemsContainer key="ItemsContainer" isLoading={appState.item.status === 'loading'} data={appState.item.data} />
             </React.Suspense>
           </Route>
           <Route path="*">

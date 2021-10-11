@@ -4,3 +4,14 @@ export enum CategoryPatterns {
   CREATE = 'inventory.category.create',
   HEALTH = 'inventory.category.health'
 }
+
+export enum ItemPatterns {
+  LIST = 'inventory.item.list',
+  SINGLE = 'inventory.item.single',
+  HEALTH = 'inventory.item.health',
+  CATEGORY = 'inventory.item.category',
+  COMPANY = 'inventory.item.company',
+  LOCATION = 'inventory.item.location',
+  TYPE = 'inventory.item.type',
+  SIZE = 'inventory.item.size',
+}
