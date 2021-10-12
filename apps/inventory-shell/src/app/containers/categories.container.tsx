@@ -1,6 +1,7 @@
 import React from 'react';
-import { Show, LoadingCard, Alerts, Cards } from '@thoraxia/ui-components/*';
+import { Show, LoadingCard, Alerts, Cards, DevDebugger } from '@thoraxia/ui-components/*';
 import { Link } from 'react-router-dom';
+import { useAppState } from '@thoraxia/data-access-inventory';
 
 interface Props {
   isLoading: boolean;
@@ -8,6 +9,15 @@ interface Props {
 }
 
 function CategoriesContainer(props: Props) {
+
+  const { appState } = useAppState();
+
+  const getProductCount = React.useCallback((id: string) => {
+    if (id === null) {
+      return null;
+    }
+    return appState.item.data.filter(item => item.category_id === id)?.length || 0;
+  }, []);
 
   return (
     <>
@@ -19,7 +29,7 @@ function CategoriesContainer(props: Props) {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             {props.data.map(item => (
               <Link to={`/categories/${item.id}`}>
-                <Cards key={item.id} hasPicture={item.picture !== null} picturePath={item.picture !== null ? item.picture : undefined} header={item.title} />
+                <Cards key={item.id} hasPicture={item.picture !== null} picturePath={item.picture !== null ? item.picture : undefined} header={`${item.title} (${getProductCount(item.id)})`} />
               </Link>
             ))}
           </div>

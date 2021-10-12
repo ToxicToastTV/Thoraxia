@@ -1,19 +1,29 @@
 import { Module } from '@nestjs/common';
-import { CategoryEntity } from './entities/category.entity';
-import { CategoryMapper } from './mappers/category.mapper';
-import { DomainModule } from '../domain/domain.module';
-import { CategoryRepository } from './repositories/category.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { environment } from '../../environments/environment';
+import { DomainModule } from '../domain/domain.module';
+//
+import { CategoryEntity } from './entities/category.entity';
+import { ItemEntity } from './entities/item.entity';
+//
+import { CategoryMapper } from './mappers/category.mapper';
+import { ItemMapper } from './mappers/item.mapper';
+//
+import { CategoryRepository } from './repositories/category.repository';
+import { ItemRepository } from './repositories/item.repository';
+
 
 const repositories = [
-  CategoryRepository
+  CategoryRepository,
+  ItemRepository
 ];
 const mappers = [
-  CategoryMapper
+  CategoryMapper,
+  ItemMapper,
 ];
 const entities = [
-  CategoryEntity
+  CategoryEntity,
+  ItemEntity
 ];
 
 @Module({

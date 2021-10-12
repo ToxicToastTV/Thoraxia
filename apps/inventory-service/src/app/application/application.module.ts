@@ -4,13 +4,15 @@ import { GetCategoriesHandler } from './queries/handler/get-categories.handler';
 import { GetCategoryHandler } from './queries/handler/get-category.handler';
 import { DomainModule } from '../domain/domain.module';
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
+import { GetItemsHandler } from './queries/handler/get-items.handler';
 
 
 const commands = [];
 const events = [];
 const queries = [
   GetCategoriesHandler,
-  GetCategoryHandler
+  GetCategoryHandler,
+  GetItemsHandler
 ];
 
 @Module({

@@ -1,6 +1,9 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { BaseDomain, Nullable } from '@thoraxia/shared';
 import { BadRequestException } from '@nestjs/common';
+import { TitleValidation } from '../validations/title.validation';
+import { SlugValidation } from '../validations/slug.validation';
+import { ItemModel } from '../models/item.model';
 
 export class ItemDomain extends AggregateRoot implements BaseDomain<any> {
 
@@ -13,9 +16,10 @@ export class ItemDomain extends AggregateRoot implements BaseDomain<any> {
     private size_id: Nullable<string>,
     private title: string,
     private slug: string,
-    private quantity: number,
-    private minSku: number,
-    private maxSku: number,
+    private quantity: Nullable<number>,
+    private minSku: Nullable<number>,
+    private maxSku: Nullable<number>,
+    private active: boolean,
     private readonly created_at: Date,
     private updated_at: Date | null,
     private deleted_at: Date | null
@@ -31,7 +35,7 @@ export class ItemDomain extends AggregateRoot implements BaseDomain<any> {
     return !!this.deleted_at;
   }
 
-  public toAnemic(): any {
+  public toAnemic(): ItemModel {
     return {
       id: this.id,
       title: this.title,
@@ -44,6 +48,7 @@ export class ItemDomain extends AggregateRoot implements BaseDomain<any> {
       quantity: this.quantity,
       minSku: this.minSku,
       maxSku: this.maxSku,
+      active: this.active,
       created_at: this.created_at,
       updated_at: this.updated_at,
       deleted_at: this.deleted_at,
@@ -71,6 +76,16 @@ export class ItemDomain extends AggregateRoot implements BaseDomain<any> {
       this.updated_at = new Date();
       this.deleted_at = null;
       // Apply Restore Event
+    }
+  }
+
+  public createItem(): void {
+    try {
+      TitleValidation(this.title);
+      SlugValidation(this.slug);
+      // Apply Create Event
+    } catch (e) {
+      // Apply Error Event
     }
   }
 
