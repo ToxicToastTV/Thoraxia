@@ -167,12 +167,12 @@ export function App() {
           </Route>
           <Route exact path="/categories/:id">
             <React.Suspense fallback={<Loading color="text-primary" />}>
-              <CategoryContainer key="CategoryContainer" isLoading={appState.item.status === 'loading'} data={appState.item.data.filter(item => item.category_id === appState.item.selectedCategory)} id={getIdParam(2)} />
+              <CategoryContainer key="CategoryContainer" isLoading={appState.item.status === 'loading'} data={appState.item.data.filter(item => item.category_id === appState.item.selectedCategory && item.quantity > 0)} id={getIdParam(2)} />
             </React.Suspense>
           </Route>
           <Route path="/items" exact>
             <React.Suspense fallback={<Loading color="text-primary" />}>
-              <ItemsContainer key="ItemsContainer" isLoading={appState.item.status === 'loading'} data={appState.item.data} />
+              <ItemsContainer key="ItemsContainer" isLoading={appState.item.status === 'loading'} data={appState.item.data.filter(item => item.quantity > 0)} />
             </React.Suspense>
           </Route>
           <Route path="*">

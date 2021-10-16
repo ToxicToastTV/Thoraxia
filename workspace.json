@@ -248,7 +248,7 @@
         "serve": {
           "executor": "@nrwl/web:dev-server",
           "options": {
-            "buildTarget": "inventory-admin:build",
+            "buildTarget": "inventory-admin:build:production",
             "hmr": true
           },
           "configurations": {

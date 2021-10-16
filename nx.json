@@ -29,33 +29,35 @@
   },
   "projects": {
     "data-access-auth0": {
-      "tags": []
+      "tags": ["auth"]
     },
     "data-access-inventory": {
       "tags": ["inventory", "state"]
     },
     "gateway": {
-      "tags": []
+      "tags": ["api"]
     },
     "health": {
-      "tags": []
+      "tags": ["ui", "health"]
     },
     "health-e2e": {
-      "tags": [],
+      "tags": ["testing"],
       "implicitDependencies": ["health"]
     },
     "inventory-admin": {
-      "tags": ["ui", "inventory", "administration"]
+      "tags": ["ui", "inventory", "administration"],
+      "implicitDependencies": ["ui-components", "data-access-inventory", "data-access-auth0", "ui-hooks"]
     },
     "inventory-admin-e2e": {
       "tags": ["inventory", "testing"],
       "implicitDependencies": ["inventory-admin"]
     },
     "inventory-service": {
-      "tags": []
+      "tags": ["inventory", "api"]
     },
     "inventory-shell": {
-      "tags": ["ui", "inventory"]
+      "tags": ["ui", "inventory"],
+      "implicitDependencies": ["ui-components", "data-access-inventory", "data-access-auth0", "ui-hooks"]
     },
     "inventory-shell-e2e": {
       "tags": ["inventory", "testing"],
@@ -68,7 +70,7 @@
       "tags": ["ui"]
     },
     "ui-hooks": {
-      "tags": []
+      "tags": ["ui"]
     }
   }
 }

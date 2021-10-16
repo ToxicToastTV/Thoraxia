@@ -23,7 +23,7 @@ function ItemCard(props: Props) {
 
   const OutOfStock = React.useCallback((minSku: number, qty: number) => {
     if (qty <= minSku) {
-      return 'bg-warning hidden';
+      return 'bg-error';
     }
     return '';
   }, []);

@@ -16,7 +16,7 @@ function CategoriesContainer(props: Props) {
     if (id === null) {
       return null;
     }
-    return appState.item.data.filter(item => item.category_id === id)?.length || 0;
+    return appState.item.data.filter(item => item.category_id === id && item.quantity > 0)?.length || 0;
   }, []);
 
   return (
