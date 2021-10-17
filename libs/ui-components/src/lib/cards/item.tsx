@@ -32,14 +32,14 @@ function ItemCard(props: Props) {
     if (id === null) {
       return null;
     }
-    return appState.category.data.find(item => item.id === id)?.title || '';
+    return appState.category.data.find(item => item.id === id)?.title ?? '';
   }, []);
 
   const getCompanyName = React.useCallback((id: Nullable<string>) => {
     if (id === null) {
       return 'COMPANY_ID';
     }
-    return appState.company.data.find(item => item.id === id)?.title || '';
+    return appState.company.data.find(item => item.id === id)?.title ?? '';
   }, []);
 
   return (

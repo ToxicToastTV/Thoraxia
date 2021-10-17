@@ -1,7 +1,7 @@
 import React from 'react';
 import { combineReducers } from '@thoraxia/shared';
 import { AppContext } from '../contexts';
-import { AuthReducer, CategoryReducer, ItemReducer, UiReducer } from '../states/reducers';
+import { AuthReducer, CategoryReducer, CompanyReducer, ItemReducer, UiReducer } from '../states/reducers';
 import { initAppState } from '../states/models';
 
 interface Props {
@@ -15,6 +15,7 @@ function AppProvider(props: Props) {
       auth: AuthReducer,
       category: CategoryReducer,
       item: ItemReducer,
+      company: CompanyReducer
     });
   }, []);
   const [state, dispatch] = React.useReducer(rootReducer, initAppState);

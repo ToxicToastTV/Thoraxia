@@ -4,6 +4,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { environment } from '../../environments/environment';
 import { InventoryGuard } from './inventory.guard';
 import { ItemController } from './item.controller';
+import { CompanyController } from './company.controller';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { ItemController } from './item.controller';
   ],
   controllers: [
     CategoryController,
-    ItemController
+    ItemController,
+    CompanyController,
   ],
   providers: [InventoryGuard],
 })

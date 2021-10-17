@@ -37,13 +37,6 @@
     "gateway": {
       "tags": ["api"]
     },
-    "health": {
-      "tags": ["ui", "health"]
-    },
-    "health-e2e": {
-      "tags": ["testing"],
-      "implicitDependencies": ["health"]
-    },
     "inventory-admin": {
       "tags": ["ui", "inventory", "administration"],
       "implicitDependencies": ["ui-components", "data-access-inventory", "data-access-auth0", "ui-hooks"]

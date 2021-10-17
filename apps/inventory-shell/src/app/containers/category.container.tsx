@@ -2,6 +2,7 @@ import React from 'react';
 import { DevDebugger, Show, Alerts, ItemCard } from '@thoraxia/ui-components/*';
 import { fetcherUtils, Nullable } from '@thoraxia/shared';
 import { useAppState, useItemState } from '@thoraxia/data-access-inventory';
+import { Link } from 'react-router-dom';
 
 interface Props {
   isLoading: boolean;
@@ -30,17 +31,19 @@ function CategoryContainer(props: Props) {
       <Show show={props.data.length > 0}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {props.data.map(((item, index: number) => (
-            <ItemCard
-              key={index}
-              category_id={null}
-              company_id={item.company_id}
-              size_id={item.size_id}
-              type_id={item.size_id}
-              location_id={item.location_id}
-              title={item.title}
-              minSku={item.minSku}
-              quantity={item.quantity}
-            />
+            <Link to={`/items/${item.id}`}>
+              <ItemCard
+                key={index}
+                category_id={null}
+                company_id={item.company_id}
+                size_id={item.size_id}
+                type_id={item.size_id}
+                location_id={item.location_id}
+                title={item.title}
+                minSku={item.minSku}
+                quantity={item.quantity}
+              />
+            </Link>
           )))}
         </div>
       </Show>

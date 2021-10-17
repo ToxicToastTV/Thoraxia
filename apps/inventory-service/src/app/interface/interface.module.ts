@@ -6,6 +6,7 @@ import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
 import { HealthController } from './controllers/health.controller';
 import { ItemController } from './controllers/item.controller';
+import { CompanyController } from './controllers/company.controller';
 
 
 
@@ -19,7 +20,8 @@ import { ItemController } from './controllers/item.controller';
     CategoryController,
     LocationController,
     HealthController,
-    ItemController
+    ItemController,
+    CompanyController
   ],
   exports: [],
 })

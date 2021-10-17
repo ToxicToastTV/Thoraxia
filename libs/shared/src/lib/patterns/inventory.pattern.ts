@@ -15,3 +15,10 @@ export enum ItemPatterns {
   TYPE = 'inventory.item.type',
   SIZE = 'inventory.item.size',
 }
+
+export enum CompanyPatterns {
+  LIST = 'inventory.company.list',
+  SINGLE = 'inventory.company.single',
+  CREATE = 'inventory.company.create',
+  HEALTH = 'inventory.company.health'
+}

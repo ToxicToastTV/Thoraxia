@@ -2,7 +2,7 @@ import { Controller, Get, HttpException, Inject, Logger, OnModuleInit, Param, Us
 import { InventoryGuard } from './inventory.guard';
 import { ClientKafka } from '@nestjs/microservices';
 import { Roles } from './inventory.decorator';
-import { BaseRoles, ItemPatterns } from '@thoraxia/shared';
+import { BaseRoles, CompanyPatterns, ItemPatterns } from '@thoraxia/shared';
 
 @Controller('inventory/item')
 @UseGuards(InventoryGuard)
@@ -18,6 +18,7 @@ export class ItemController implements OnModuleInit {
     this.client.subscribeToResponseOf(ItemPatterns.SINGLE);
     this.client.subscribeToResponseOf(ItemPatterns.HEALTH);
     this.client.subscribeToResponseOf(ItemPatterns.CATEGORY);
+    this.client.subscribeToResponseOf(ItemPatterns.COMPANY);
     await this.client.connect();
   }
 
@@ -98,7 +99,21 @@ export class ItemController implements OnModuleInit {
   @Get(':id/company')
   @Roles(BaseRoles.ACCESS)
   public async getItemByCompany(@Param('id') id: string): Promise<any> {
-    return [];
+    Logger.debug(ItemPatterns.COMPANY);
+    return await this.client
+      .send(ItemPatterns.COMPANY, {})
+      .toPromise()
+      .catch((error) => {
+        Logger.error(error);
+      })
+      .then((data) => {
+        if ('error' in data) {
+          const status = data?.error?.status || 500;
+          const message = data?.error?.message || '';
+          throw new HttpException(message, status);
+        }
+        return data;
+      });
   }
 
   @Get(':id/location')

@@ -138,6 +138,7 @@ export function App() {
   const CategoriesContainer = React.lazy(() => import('./containers/categories.container'));
   const CategoryContainer =  React.lazy(() => import('./containers/category.container'));
   const ItemsContainer = React.lazy(() => import('./containers/items.container'));
+  const CompaniesContainer = React.lazy(() => import('./containers/companies.container'));
 
 
 
@@ -160,6 +161,7 @@ export function App() {
         title="Thoraxia - Inventory UI"
       >
         <Switch>
+
           <Route exact path="/categories">
             <React.Suspense fallback={<Loading color="text-primary" />}>
               <CategoriesContainer key="CategoriesContainer" isLoading={appState.category.status === 'loading'} data={appState.category.data} />
@@ -170,11 +172,25 @@ export function App() {
               <CategoryContainer key="CategoryContainer" isLoading={appState.item.status === 'loading'} data={appState.item.data.filter(item => item.category_id === appState.item.selectedCategory && item.quantity > 0)} id={getIdParam(2)} />
             </React.Suspense>
           </Route>
+
           <Route path="/items" exact>
             <React.Suspense fallback={<Loading color="text-primary" />}>
               <ItemsContainer key="ItemsContainer" isLoading={appState.item.status === 'loading'} data={appState.item.data.filter(item => item.quantity > 0)} />
             </React.Suspense>
           </Route>
+
+          <Route path="/items/:id" exact>
+            <React.Suspense fallback={<Loading color="text-primary" />}>
+              <DevDebugger data={appState.item} />
+            </React.Suspense>
+          </Route>
+
+          <Route path="/companies" exact>
+            <React.Suspense fallback={<Loading color="text-primary" />}>
+              <CompaniesContainer key="CompaniesContainer" isLoading={appState.company.status === 'loading'} data={appState.company.data} />
+            </React.Suspense>
+          </Route>
+
           <Route path="*">
             <Alerts type="error" text="Page not found" />
             <DevDebugger data={appState} />
