@@ -34,6 +34,7 @@ function CategoryContainer(props: Props) {
             <Link to={`/items/${item.id}`}>
               <ItemCard
                 key={index}
+                id={item.id}
                 category_id={null}
                 company_id={item.company_id}
                 size_id={item.size_id}

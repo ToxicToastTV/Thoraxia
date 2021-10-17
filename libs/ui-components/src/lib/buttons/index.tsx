@@ -35,7 +35,12 @@ function Buttons(props: Props) {
 
 
   return (
-    <button onClick={props.onClick} className={`btn ${buttonSize()} ${buttonType()} ${buttonDisabled()} ${buttonGlass()} ${buttonLoading()}`}>{props.children}</button>
+    <button onClick={(event) => {
+      event.preventDefault();
+      if (props.onClick) {
+        props.onClick();
+      }
+    }} className={`btn ${buttonSize()} ${buttonType()} ${buttonDisabled()} ${buttonGlass()} ${buttonLoading()}`}>{props.children}</button>
   );
 }
 

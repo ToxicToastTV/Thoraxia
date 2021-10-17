@@ -27,6 +27,7 @@ function ItemsContainer(props: Props) {
             <Link to={`/items/${item.id}`}>
               <ItemCard
                 key={index}
+                id={item.id}
                 category_id={item.category_id}
                 company_id={item.company_id}
                 size_id={item.size_id}
