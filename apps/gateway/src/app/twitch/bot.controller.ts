@@ -21,7 +21,7 @@ export class BotController implements OnModuleInit {
         username: environment.TWITCH_USERNAME,
         password: environment.TWITCH_OAUTH,
       },
-      channels: ['toxictoast', 'shroud'],
+      channels: ['toxictoast'],
     });
   }
 

@@ -34,6 +34,9 @@
     "data-access-inventory": {
       "tags": ["inventory", "state"]
     },
+    "data-access-twitch": {
+      "tags": []
+    },
     "gateway": {
       "tags": ["api"]
     },

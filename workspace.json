@@ -47,6 +47,28 @@
         }
       }
     },
+    "data-access-twitch": {
+      "root": "libs/data-access-twitch",
+      "sourceRoot": "libs/data-access-twitch/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/data-access-twitch/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/data-access-twitch"],
+          "options": {
+            "jestConfig": "libs/data-access-twitch/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "gateway": {
       "root": "apps/gateway",
       "sourceRoot": "apps/gateway/src",
