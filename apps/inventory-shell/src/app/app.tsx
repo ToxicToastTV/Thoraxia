@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { useParams } from 'react-router';
 import { Nullable, Optional } from '@thoraxia/shared';
 
+
 export function App() {
   const { appState } = useAppState();
   const { id } = useParams<{ id: Optional<string>; }>();
@@ -139,7 +140,8 @@ export function App() {
   const CategoryContainer =  React.lazy(() => import('./containers/category.container'));
   const ItemsContainer = React.lazy(() => import('./containers/items.container'));
   const CompaniesContainer = React.lazy(() => import('./containers/companies.container'));
-
+  const RoomsContainer = React.lazy(() => import('./containers/rooms.container'));
+  const SSEContainer = React.lazy(() => import('./sse'));
 
 
   return (
@@ -178,7 +180,6 @@ export function App() {
               <ItemsContainer key="ItemsContainer" isLoading={appState.item.status === 'loading'} data={appState.item.data.filter(item => item.quantity > 0)} />
             </React.Suspense>
           </Route>
-
           <Route path="/items/:id" exact>
             <React.Suspense fallback={<Loading color="text-primary" />}>
               <DevDebugger data={appState.item} />
@@ -188,6 +189,12 @@ export function App() {
           <Route path="/companies" exact>
             <React.Suspense fallback={<Loading color="text-primary" />}>
               <CompaniesContainer key="CompaniesContainer" isLoading={appState.company.status === 'loading'} data={appState.company.data} />
+            </React.Suspense>
+          </Route>
+
+          <Route exact path="/rooms">
+            <React.Suspense fallback={<Loading color="text-primary" />}>
+              <RoomsContainer key="RoomsContainer" isLoading={false} data={[]} />
             </React.Suspense>
           </Route>
 

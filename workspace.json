@@ -378,6 +378,160 @@
         }
       }
     },
+    "twitch-service": {
+      "root": "apps/twitch-service",
+      "sourceRoot": "apps/twitch-service/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/twitch-service",
+            "main": "apps/twitch-service/src/main.ts",
+            "tsConfig": "apps/twitch-service/tsconfig.app.json",
+            "assets": ["apps/twitch-service/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/twitch-service/src/environments/environment.ts",
+                  "with": "apps/twitch-service/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "twitch-service:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/twitch-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/twitch-service"],
+          "options": {
+            "jestConfig": "apps/twitch-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "twitch-shell": {
+      "root": "apps/twitch-shell",
+      "sourceRoot": "apps/twitch-shell/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/twitch-shell",
+            "index": "apps/twitch-shell/src/index.html",
+            "main": "apps/twitch-shell/src/main.tsx",
+            "polyfills": "apps/twitch-shell/src/polyfills.ts",
+            "tsConfig": "apps/twitch-shell/tsconfig.app.json",
+            "assets": [
+              "apps/twitch-shell/src/favicon.ico",
+              "apps/twitch-shell/src/assets"
+            ],
+            "styles": ["apps/twitch-shell/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/twitch-shell/src/environments/environment.ts",
+                  "with": "apps/twitch-shell/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "twitch-shell:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "twitch-shell:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/twitch-shell/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/twitch-shell"],
+          "options": {
+            "jestConfig": "apps/twitch-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "twitch-shell-e2e": {
+      "root": "apps/twitch-shell-e2e",
+      "sourceRoot": "apps/twitch-shell-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/twitch-shell-e2e/cypress.json",
+            "devServerTarget": "twitch-shell:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "twitch-shell:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/twitch-shell-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "ui-components": {
       "root": "libs/ui-components",
       "sourceRoot": "libs/ui-components/src",

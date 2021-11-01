@@ -1,7 +1,9 @@
 export const environment = {
   production: true,
-  KAFKA_URI: '192.168.178.4:9092',
-  DATABASE_URI: '192.168.178.4',
+  // KAFKA_URI: '192.168.178.4:9092',
+  KAFKA_URI: 'localhost:29092',
+  // DATABASE_URI: '192.168.178.4',
+  DATABASE_URI: 'localhost',
   DATABASE_PORT: 3306,
   DATABASE_USERNAME: 'thoraxia',
   DATABASE_PASSWORD: 'ToxicToast_1990',

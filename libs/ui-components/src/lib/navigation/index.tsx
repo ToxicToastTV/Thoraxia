@@ -8,7 +8,7 @@ interface Props {
   isLoggedIn: boolean;
   loginWithRedirect: () => void;
   logoutWithRedirect: () => void;
-  settingsWithRedirect: () => void;
+  settingsWithRedirect?: () => void;
   navigation: Array<{ title: string; route: string; }>;
   title: string;
 }

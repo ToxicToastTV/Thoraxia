@@ -39,7 +39,12 @@
     },
     "inventory-admin": {
       "tags": ["ui", "inventory", "administration"],
-      "implicitDependencies": ["ui-components", "data-access-inventory", "data-access-auth0", "ui-hooks"]
+      "implicitDependencies": [
+        "ui-components",
+        "data-access-inventory",
+        "data-access-auth0",
+        "ui-hooks"
+      ]
     },
     "inventory-admin-e2e": {
       "tags": ["inventory", "testing"],
@@ -50,7 +55,12 @@
     },
     "inventory-shell": {
       "tags": ["ui", "inventory"],
-      "implicitDependencies": ["ui-components", "data-access-inventory", "data-access-auth0", "ui-hooks"]
+      "implicitDependencies": [
+        "ui-components",
+        "data-access-inventory",
+        "data-access-auth0",
+        "ui-hooks"
+      ]
     },
     "inventory-shell-e2e": {
       "tags": ["inventory", "testing"],
@@ -58,6 +68,16 @@
     },
     "shared": {
       "tags": ["shared"]
+    },
+    "twitch-service": {
+      "tags": []
+    },
+    "twitch-shell": {
+      "tags": []
+    },
+    "twitch-shell-e2e": {
+      "tags": [],
+      "implicitDependencies": ["twitch-shell"]
     },
     "ui-components": {
       "tags": ["ui"]

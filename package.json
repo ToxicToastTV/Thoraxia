@@ -9,11 +9,13 @@
     "start:inventory-shell": "nx serve inventory-shell",
     "start:inventory-admin": "nx serve inventory-admin",
     "start:inventory-service": "nx serve inventory-service",
+    "start:twitch-shell": "nx serve twitch-shell",
     "build": "nx build",
     "build:gateway": "nx build gateway",
     "build:inventory-shell": "nx build inventory-shell",
     "build:inventory-admin": "nx build inventory-admin",
     "build:inventory-service": "nx build inventory-service",
+    "build:twitch-shell": "nx build twitch-shell",
     "test": "nx test",
     "test:gateway": "nx test gateway",
     "test:gateway:coverage": "nx test gateway --coverage",
@@ -42,7 +44,7 @@
     "help": "nx help",
     "outdated": "npm outdated",
     "update:all": "npx npm-check-updates -u",
-    "build:css": "npx tailwindcss -o ./apps/inventory-shell/src/styles.scss && npx tailwindcss -o ./apps/inventory-admin/src/styles.scss"
+    "build:css": "npx tailwindcss -o ./apps/inventory-shell/src/styles.scss && npx tailwindcss -o ./apps/inventory-admin/src/styles.scss -o ./apps/twitch-shell/src/styles.scss"
   },
   "private": true,
   "dependencies": {
@@ -70,7 +72,9 @@
     "regenerator-runtime": "0.13.9",
     "rxjs": "~7.3.0",
     "swr": "^1.0.1",
+    "tmi.js": "^1.8.5",
     "tslib": "^2.3.1",
+    "twitch-bot": "^1.3.5",
     "typeorm": "^0.2.38"
   },
   "devDependencies": {

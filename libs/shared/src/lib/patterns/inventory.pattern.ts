@@ -14,6 +14,7 @@ export enum ItemPatterns {
   LOCATION = 'inventory.item.location',
   TYPE = 'inventory.item.type',
   SIZE = 'inventory.item.size',
+  CREATE = 'inventory.item.create'
 }
 
 export enum CompanyPatterns {

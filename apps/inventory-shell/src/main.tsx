@@ -6,6 +6,7 @@ import App from './app/app';
 import { DataAccessInventory } from '@thoraxia/data-access-inventory';
 import { DataAccessAuth0 } from '@thoraxia/data-access-auth0';
 import { environment } from './environments/environment';
+import SSE from './app/sse';
 
 ReactDOM.render(
   <StrictMode>
@@ -16,7 +17,8 @@ ReactDOM.render(
         redirectUri={window.location.origin}
         >
         <HashRouter>
-          <App />
+          <SSE key="SSE" />
+          <App key="App" />
         </HashRouter>
       </DataAccessAuth0>
     </DataAccessInventory>
